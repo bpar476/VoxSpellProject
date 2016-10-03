@@ -2,16 +2,15 @@ package voxspell;
 
 import voxspell.Festival.FestivalService;
 
-public class DummyQuiz extends NewQuiz implements Quiz {
+public class DummyQuiz implements Quiz {
 	
-	public DummyQuiz(int startLevel){
-		level = startLevel;
-	}
-	
-	
-	
+	public static final int CORRECT_FIRST_TRY = 0;
+	public static final int CORRECT_SECOND_TRY = 1;
+	public static final int WRONG_FIRST_TRY = 2;
+	public static final int WRONG_SECOND_TRY = 3;
+		
 	public int compare(String answer){
-		if(answer.equals("correct")){
+		if(answer.equalsIgnoreCase("word")){
 			return CORRECT_FIRST_TRY;
 		}else{
 			return WRONG_SECOND_TRY;

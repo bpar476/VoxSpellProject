@@ -55,7 +55,7 @@ public class SpellScreenController {
 			spellZone.setDisable(false);
 			inQuiz = true;
 			startSubmit.setText("Submit");
-			quiz = new DummyQuiz(1);
+			quiz = new DummyQuiz();
 			quiz.speakWord();
 		}else{
 			String answer = spellZone.getText();

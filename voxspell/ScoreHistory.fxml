@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="411.0" prefWidth="753.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <HBox prefHeight="343.0" prefWidth="458.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="268.0" prefWidth="272.0" HBox.hgrow="ALWAYS">
+               <bottom>
+                  <Button mnemonicParsing="false" text="Full History" BorderPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font name="DejaVu Sans Mono Bold" size="14.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets bottom="10.0" left="20.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </bottom>
+               <top>
+                  <Label text="History" underline="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="DejaVu Sans Mono Bold" size="24.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets top="10.0" />
+                     </BorderPane.margin>
+                  </Label>
+               </top>
+               <center>
+                  <LineChart legendVisible="false" prefHeight="303.0" prefWidth="254.0" title="Scores for last 10 quizzes" BorderPane.alignment="CENTER">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </LineChart>
+               </center>
+            </BorderPane>
+            <BorderPane prefHeight="268.0" prefWidth="208.0" HBox.hgrow="ALWAYS">
+               <top>
+                  <Label prefHeight="30.0" prefWidth="111.0" text="Summary" underline="true" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets top="10.0" />
+                     </BorderPane.margin>
+                     <font>
+                        <Font name="DejaVu Sans Mono Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </top>
+               <center>
+                  <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label text="Best score: X">
+                           <font>
+                              <Font name="DejaVu Sans Mono Bold" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="5.0" top="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Best streak: X">
+                           <font>
+                              <Font name="DejaVu Sans Mono Bold" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="5.0" top="25.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Best word list: ABCD List">
+                           <VBox.margin>
+                              <Insets left="5.0" top="25.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="DejaVu Sans Mono Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Highest level: X">
+                           <VBox.margin>
+                              <Insets left="5.0" top="25.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="DejaVu Sans Mono Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </center>
+               <bottom>
+                  <Button mnemonicParsing="false" text="Back to main menu" BorderPane.alignment="CENTER_RIGHT">
+                     <BorderPane.margin>
+                        <Insets bottom="10.0" right="15.0" />
+                     </BorderPane.margin>
+                     <font>
+                        <Font name="DejaVu Sans Mono Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </bottom>
+            </BorderPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
