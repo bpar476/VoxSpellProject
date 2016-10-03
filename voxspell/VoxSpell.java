@@ -28,7 +28,7 @@ public class VoxSpell extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			//Loads an initial window to choose the initial difficulty. InitialDifficulty transitions to the main menu.
-			Parent root = FXMLLoader.load(getClass().getResource("SpellScreen.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -46,20 +46,7 @@ public class VoxSpell extends Application {
 		}
 	}
 
-	//Initialises resource files for first time use if the files don't exist already.
 	public static void main(String[] args) {
-	/*	File stats, diff, specStats;
-		String dir = System.getProperty("user.dir");
-		stats = new File(dir + "/.Resources/statistics.ser");
-		diff = new File(dir + "/.Resources/currentDifficultyLevel.txt");
-		specStats = new File(dir + "/.Resources/specificStatsLevel.txt");
-		try{
-			stats.createNewFile();
-			specStats.createNewFile();
-			diff.createNewFile();
-		}catch(IOException e){
-			e.printStackTrace();
-		}*/
 		launch(args);
 	}
 }
