@@ -1,4 +1,4 @@
-package voxspell;
+package voxspell.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import voxspell.DummyQuiz;
+import voxspell.Festival;
 import voxspell.Festival.FestivalService;
 
 public class SpellScreenController {

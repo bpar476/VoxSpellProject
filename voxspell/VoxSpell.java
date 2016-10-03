@@ -21,14 +21,20 @@ import voxspell.Festival;
  *
  */
 public class VoxSpell extends Application {
+	
+	private static Stage mainStage;
+	
+	public static Stage getMainStage(){
+		return mainStage;
+	}
 	/**
 	 * Does basic GUI initialisation.
 	 */
 	@Override
 	public void start(Stage primaryStage) {
+		mainStage = primaryStage;
 		try {
-			//Loads an initial window to choose the initial difficulty. InitialDifficulty transitions to the main menu.
-			Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("gui/MainMenu.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
