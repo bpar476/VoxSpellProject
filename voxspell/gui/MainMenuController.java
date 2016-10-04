@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import voxspell.VoxSpell;
 
@@ -41,7 +40,7 @@ public class MainMenuController {
 	 */
 	@FXML
 	public void handleSettingsPressed(ActionEvent ae){
-		nextWindow = "Settings.fxml";
+		nextWindow = "SettingsMenu.fxml";
 		changeScene();
 	}
 	
