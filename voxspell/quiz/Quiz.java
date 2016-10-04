@@ -1,4 +1,4 @@
-package voxspell;
+package voxspell.quiz;
 
 public interface Quiz {
 

@@ -1,4 +1,4 @@
-package voxspell;
+package voxspell.festival;
 
 import java.io.BufferedReader;
 import java.io.IOException;

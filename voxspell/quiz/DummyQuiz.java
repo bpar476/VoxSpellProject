@@ -1,6 +1,7 @@
-package voxspell;
+package voxspell.quiz;
 
-import voxspell.Festival.FestivalService;
+import voxspell.festival.Festival;
+import voxspell.festival.Festival.FestivalService;
 
 public class DummyQuiz implements Quiz {
 	

@@ -13,10 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import voxspell.DummyQuiz;
-import voxspell.Festival;
 import voxspell.VoxSpell;
-import voxspell.Festival.FestivalService;
+import voxspell.festival.Festival;
+import voxspell.festival.Festival.FestivalService;
+import voxspell.quiz.DummyQuiz;
 
 public class SpellScreenController {
 
