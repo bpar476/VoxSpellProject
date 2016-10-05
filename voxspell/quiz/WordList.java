@@ -8,29 +8,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class WordList {
-	
+
 	private File wordListFile;
 	private ArrayList<String> wordList;
 	int level;
 	boolean levelFound;
-	
+
 	public WordList(String location, int chosenLevel){
 		wordList = new ArrayList<>();
 		levelFound = false;
+		level = chosenLevel;
 		wordListFile = new File(location);
-		
+
 		buildWordList();
 	}
-	
+
 	public ArrayList<String> getWordList(){
 		return wordList;
 	}
-	
+
 	public void nextLevel(){
 		level++;
 		buildWordList();
 	}
-	
+
 	private void buildWordList(){
 		BufferedReader rdr = null;
 		try {
@@ -39,7 +40,7 @@ public class WordList {
 			System.err.println("Error: file " + wordListFile.getAbsolutePath() + " not found");
 			e.printStackTrace();
 		}
-		
+
 		String line;
 		try {
 			while((line = rdr.readLine()) != null){
@@ -50,8 +51,10 @@ public class WordList {
 						wordList.add(line.trim());						
 					}
 				}else{
-					if((Integer.parseInt(line.split("\\s+")[1]) == level)){
-						levelFound = true;
+					if(line.charAt(0) == '%'){
+						if((Integer.parseInt(line.split("\\s+")[1]) == level)){
+							levelFound = true;
+						}
 					}
 				}
 			}
@@ -67,4 +70,3 @@ public class WordList {
 		}
 	}
 }
-	

@@ -23,34 +23,35 @@ public class NewQuiz {
 
 	//Static constants representing answer statistic
 	public static final int CORRECT_FIRST_TRY = 0;
-	public static final int CORRECT_SECOND_TRY = 1;
-	public static final int WRONG_FIRST_TRY = 2;
-	public static final int WRONG_SECOND_TRY = 3;
+	public static final int CORRECT_NOT_FIRST_TRY = 1;
+	public static final int WRONG_STILL_TRYING = 2;
+	public static final int WRONG_LAST_TRY = 3;
 	
 	//Instance variables
-	protected ArrayList<String> wordsInLevel;
-	protected List<String> wordsToQuiz;
-	protected int upToWordIndex;
-	protected boolean firstTry;
-	protected static final int NUM_WORDS_IN_QUIZ = 4;
+	private ArrayList<String> wordsInLevel;
+	private List<String> wordsToQuiz;
+	private int upToWordIndex;
+	private int numTries;
+	private QuizRules rules;
 	
 	/**
 	 * Constructor initialises quiz from given level. Creates 10 word list of words to spell from the
 	 * NZCER spelling words list.
 	 * @param startLevel The difficulty level to start the quiz from.
 	 */
-	public NewQuiz(WordList wordList){
-		
+	public NewQuiz(){
+		rules = QuizRules.getInstance();
+		WordList wordList = new WordList(rules.getWordListLocation(), rules.getStartLevel());
 		//Set up wordList
 		wordsInLevel = wordList.getWordList();
 		wordsToQuiz = new ArrayList<>();
 		
 		Collections.shuffle(wordsInLevel);
-		for(int i = 0; i < NUM_WORDS_IN_QUIZ & i < wordsInLevel.size(); i++){
+		for(int i = 0; i < rules.getNumWordsInQuiz() & i < wordsInLevel.size(); i++){
 			wordsToQuiz.add(wordsInLevel.get(i));
 		}
 		//Initialise some instance variables.
-		firstTry = true;
+		numTries = 0;
 	}
 	
 	/**
@@ -84,22 +85,22 @@ public class NewQuiz {
 				serv.announce("Correct");
 			}else{
 				serv.announce("Correct! Next word... ");
+				numTries = 0;
 			}
 			upToWordIndex++;
-			if(firstTry){
+			if(numTries == 0){
 				serv.restart();
 				return CORRECT_FIRST_TRY;
 			}else{
-				firstTry = true;
 				serv.restart();
-				return CORRECT_SECOND_TRY;
+				return CORRECT_NOT_FIRST_TRY;
 			}
 		}else{
-			if(firstTry){
+			if(numTries < rules.getNumChances()-1){
 				serv.announce("Incorrect, try again");
-				firstTry = false;
 				serv.restart();
-				return WRONG_FIRST_TRY;
+				numTries++;
+				return WRONG_STILL_TRYING;
 			}else{
 				if(upToWordIndex == wordsToQuiz.size()-1){
 					//End of quiz, do not prompt for next word.
@@ -108,9 +109,9 @@ public class NewQuiz {
 					serv.announce("Incorrect! Next word... ");
 				}
 				upToWordIndex++;
-				firstTry = true;
+				numTries = 0;
 				serv.restart();
-				return WRONG_SECOND_TRY;
+				return WRONG_LAST_TRY;
 			}
 		}
 	}
