@@ -161,10 +161,7 @@ public class SpellScreenController {
 		streakLabel.setText("Streak: " + streak);
 		if(quiz.isEnded()){
 			//Placeholder for move to quiz summary screen.
-			speakAgain.setDisable(true);
-			inQuiz = false;
-			startSubmit.setText("Start Quiz");
-			spellZone.setDisable(true);
+			
 		}else{
 			quiz.speakWord();
 		}

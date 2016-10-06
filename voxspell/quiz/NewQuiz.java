@@ -1,10 +1,5 @@
 package voxspell.quiz;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,6 +27,7 @@ public class NewQuiz {
 	private List<String> wordsToQuiz;
 	private int upToWordIndex;
 	private int numTries;
+	private QuizResults results;
 	private QuizRules rules;
 	
 	/**
@@ -90,9 +86,11 @@ public class NewQuiz {
 			upToWordIndex++;
 			if(numTries == 0){
 				serv.restart();
+				results.add(correctAnswer, WordScore.FirstTry);
 				return CORRECT_FIRST_TRY;
 			}else{
 				serv.restart();
+				results.add(correctAnswer, WordScore.NotFirstTry);
 				return CORRECT_NOT_FIRST_TRY;
 			}
 		}else{
@@ -111,6 +109,7 @@ public class NewQuiz {
 				upToWordIndex++;
 				numTries = 0;
 				serv.restart();
+				results.add(correctAnswer, WordScore.Wrong);
 				return WRONG_LAST_TRY;
 			}
 		}
