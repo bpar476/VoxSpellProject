@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="454.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="454.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voxspell.gui.SummaryScreenController">
    <children>
       <BorderPane prefHeight="454.0" prefWidth="533.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -35,7 +35,7 @@
                   </BorderPane>
                   <VBox prefHeight="405.0" prefWidth="231.0">
                      <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="150.0" text="Next Level" textAlignment="CENTER">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleNextLevel" prefHeight="33.0" prefWidth="150.0" text="Next Level" textAlignment="CENTER">
                            <VBox.margin>
                               <Insets left="20.0" top="10.0" />
                            </VBox.margin>
@@ -46,7 +46,7 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="150.0" text="Retry" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#handleRetry" prefHeight="33.0" prefWidth="150.0" text="Retry" textAlignment="CENTER">
                            <VBox.margin>
                               <Insets left="20.0" top="10.0" />
                            </VBox.margin>
@@ -54,7 +54,7 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefWidth="150.0" text="Reward Video" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#handleRewardVideo" prefWidth="150.0" text="Reward Video" textAlignment="CENTER" visible="false">
                            <VBox.margin>
                               <Insets left="20.0" top="10.0" />
                            </VBox.margin>
@@ -62,7 +62,7 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Main Menu">
+                        <Button mnemonicParsing="false" onAction="#handleMainMenu" text="Main Menu">
                            <VBox.margin>
                               <Insets left="20.0" top="40.0" />
                            </VBox.margin>
@@ -70,7 +70,7 @@
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <Label text="Score: X">
+                        <Label fx:id="scoreLabel" text="Score: X">
                            <VBox.margin>
                               <Insets left="20.0" top="20.0" />
                            </VBox.margin>
@@ -78,7 +78,7 @@
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Label text="Best Streak: X">
+                        <Label fx:id="streakLabel" text="Best Streak: X">
                            <VBox.margin>
                               <Insets left="20.0" />
                            </VBox.margin>
@@ -89,7 +89,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label text="Time: ">
+                        <Label fx:id="timeLabel" text="Time: ">
                            <VBox.margin>
                               <Insets left="20.0" />
                            </VBox.margin>
@@ -100,14 +100,30 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label text="Rating: Excellent" textFill="#1bcc3e">
-                           <VBox.margin>
-                              <Insets left="20.0" top="45.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="23.0" />
-                           </font>
-                        </Label>
+                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="excellent" text="Rating: Excellent" textFill="#1bcc3e" visible="false">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="good" text="Rating: Good!" textFill="#97c98d" visible="false">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="okay" text="Rating: Okay" textFill="#ffe600" visible="false">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="poor" text="Rating: Poor" textFill="RED" visible="false">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
                      </children>
                      <HBox.margin>
                         <Insets />

@@ -23,8 +23,8 @@ public class MainMenuController {
 	public void handleStartQuizPressed(ActionEvent ae){
 		nextWindow = "SpellScreen.fxml";
 		QuizRules.setQuizType("New Quiz");
-		QuizRules.setStartLevel(Config.startLevel);
-		QuizRules.setWordListLocation(Config.wordlist);
+		//QuizRules.setStartLevel(Config.startLevel);
+		//QuizRules.setWordListLocation(Config.wordlist);
 		changeScene();
 	}
 	

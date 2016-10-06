@@ -12,14 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import voxspell.VoxSpell;
 import voxspell.festival.Festival;
-import voxspell.festival.Festival.FestivalService;
 import voxspell.quiz.DummyQuiz;
 import voxspell.quiz.NewQuiz;
+import voxspell.quiz.QuizResults;
 import voxspell.quiz.QuizRules;
-import voxspell.quiz.WordList;
 
 public class SpellScreenController {
 
@@ -29,6 +29,10 @@ public class SpellScreenController {
 	private int wordUpTo;
 	private int score;
 	private int streak;
+	private int highStreak;
+	private Long startTime;
+	private Long endTime;
+	private QuizResults results;
 
 	//FXML fields
 	@FXML
@@ -77,6 +81,7 @@ public class SpellScreenController {
 			startSubmit.setText("Submit");
 			quiz = new NewQuiz();
 			quiz.speakWord();
+			startTime = System.currentTimeMillis();
 		}else{
 			String answer = spellZone.getText();
 			if(answer.equals("")){
@@ -145,11 +150,17 @@ public class SpellScreenController {
 			score++;
 			streak++;
 		}else if(result == NewQuiz.WRONG_LAST_TRY){
+			if(streak > highStreak){
+				highStreak = streak;
+			}
 			streak = 0;
 			correct.setVisible(false);
 			incorrect.setVisible(true);
 			wordUpTo++;
 		}else if(result == NewQuiz.WRONG_STILL_TRYING){
+			if(streak > highStreak){
+				highStreak = streak;
+			}
 			streak = 0;
 			correct.setVisible(false);
 			incorrect.setVisible(true);
@@ -160,7 +171,28 @@ public class SpellScreenController {
 		scoreLabel.setText("Score: " + score);
 		streakLabel.setText("Streak: " + streak);
 		if(quiz.isEnded()){
-			//Placeholder for move to quiz summary screen.
+			endTime = System.currentTimeMillis();
+			results.setTimeTaken(endTime - startTime);
+			if(highStreak == 0){
+				highStreak = streak;
+			}
+			results.setBestStreak(highStreak);
+			results.setScore(score);
+			
+			//Load next screen and pass information to controller
+			Stage primaryStage = VoxSpell.getMainStage();
+			try {
+				FXMLLoader loader = new FXMLLoader();
+				Parent root = loader.load(getClass().getResource("ScoreSummary.fxml").openStream());
+				SummaryScreenController controller = (SummaryScreenController)loader.getController();
+				//Parent root = FXMLLoader.load(getClass().getResource("ScoreSummary.fxml"));
+				controller.setResults(results);
+				Scene scene = new Scene(root);
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 		}else{
 			quiz.speakWord();
@@ -170,6 +202,7 @@ public class SpellScreenController {
 
 	@FXML
 	public void initialize(){
+		results = new QuizResults();
 		quizTypeLabel.setText("Quiz: DummyQuiz");
 		levelLabel.setText("Level: 1");
 		wordUpTo = 0;

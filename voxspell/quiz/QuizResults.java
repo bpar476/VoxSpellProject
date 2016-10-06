@@ -6,6 +6,10 @@ import java.util.Iterator;
 public class QuizResults {
 
 	private ArrayList<Result> results;
+	private int bestStreak;
+	private int score;
+	private long timeTaken;
+	private int numWordsInQuiz;
 	
 	public QuizResults(){
 		results = new ArrayList<>();
@@ -54,5 +58,49 @@ public class QuizResults {
 	 */
 	public Iterator<Result> iterator(){
 		return results.iterator();
+	}
+	
+	/**
+	 * Sets the score achieved in the associated quiz.
+	 * @param score The final score of the user after finishing their quiz
+	 */
+	public void setScore(int score){
+		this.score = score;
+	}
+	
+	/**
+	 * Sets the best streak that a user achieved at the end of a quiz.
+	 * @param streak The user's best streak throughout the quiz.
+	 */
+	public void setBestStreak(int streak){
+		this.bestStreak = streak;
+	}
+	
+	/**
+	 * Sets the time the user took to complete the quiz.
+	 * @param time the time the user took to complete the quiz.
+	 */
+	public void setTimeTaken(Long time){
+		this.timeTaken = time;
+	}
+	
+	public int getScore(){
+		return score;
+	}
+	
+	public int getStreak(){
+		return bestStreak;
+	}
+	
+	public long getTime(){
+		return timeTaken;
+	}
+	
+	public void setNumWords(int num){
+		this.numWordsInQuiz = num;
+	}
+	
+	public int getNumWords(){
+		return numWordsInQuiz;
 	}
 }

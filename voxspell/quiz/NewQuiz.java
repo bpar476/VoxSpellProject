@@ -36,6 +36,7 @@ public class NewQuiz {
 	 * @param startLevel The difficulty level to start the quiz from.
 	 */
 	public NewQuiz(){
+		results = new QuizResults();
 		rules = QuizRules.getInstance();
 		WordList wordList = new WordList(rules.getWordListLocation(), rules.getStartLevel());
 		//Set up wordList
