@@ -46,7 +46,7 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#handleRetry" prefHeight="33.0" prefWidth="150.0" text="Retry" textAlignment="CENTER">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleRetry" prefHeight="33.0" prefWidth="150.0" text="Retry">
                            <VBox.margin>
                               <Insets left="20.0" top="10.0" />
                            </VBox.margin>
@@ -54,7 +54,7 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#handleRewardVideo" prefWidth="150.0" text="Reward Video" textAlignment="CENTER" visible="false">
+                        <Button fx:id="playVideo" mnemonicParsing="false" onAction="#handleRewardVideo" prefWidth="150.0" text="Reward Video" textAlignment="CENTER" visible="false">
                            <VBox.margin>
                               <Insets left="20.0" top="10.0" />
                            </VBox.margin>
@@ -70,9 +70,17 @@
                               <Font size="15.0" />
                            </font>
                         </Button>
+                        <Label fx:id="levelLabel" text="Level: X">
+                           <VBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
                         <Label fx:id="scoreLabel" text="Score: X">
                            <VBox.margin>
-                              <Insets left="20.0" top="20.0" />
+                              <Insets left="20.0" />
                            </VBox.margin>
                            <font>
                               <Font size="25.0" />

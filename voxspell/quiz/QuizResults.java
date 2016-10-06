@@ -10,6 +10,7 @@ public class QuizResults {
 	private int score;
 	private long timeTaken;
 	private int numWordsInQuiz;
+	private int level;
 	
 	public QuizResults(){
 		results = new ArrayList<>();
@@ -102,5 +103,13 @@ public class QuizResults {
 	
 	public int getNumWords(){
 		return numWordsInQuiz;
+	}
+	
+	public void setLevel(int lev){
+		this.level = lev;
+	}
+	
+	public int getLevel(){
+		return level;
 	}
 }

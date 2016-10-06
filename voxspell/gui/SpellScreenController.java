@@ -178,6 +178,8 @@ public class SpellScreenController {
 			}
 			results.setBestStreak(highStreak);
 			results.setScore(score);
+			results.setLevel(quiz.getLevel());
+			results.setNumWords(quiz.size());
 			
 			//Load next screen and pass information to controller
 			Stage primaryStage = VoxSpell.getMainStage();

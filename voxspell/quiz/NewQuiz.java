@@ -136,6 +136,10 @@ public class NewQuiz {
 		return wordsToQuiz.size();
 	}
 	
+	public int getLevel(){
+		return rules.getStartLevel();
+	}
+	
 	/**
 	 * recites the current word to the user using the FestivalService.
 	 */
