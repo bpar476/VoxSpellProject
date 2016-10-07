@@ -1,5 +1,6 @@
 package voxspell.gui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -21,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import voxspell.Config;
 import voxspell.VoxSpell;
 import voxspell.quiz.QuizResults;
 import voxspell.quiz.QuizResults.Result;
@@ -58,16 +60,26 @@ public class SummaryScreenController {
 	@FXML
 	public void handleNextLevel(ActionEvent ae){
 		QuizRules.setQuizType("New Quiz");
-		//QuizRules.setStartLevel(Config.startLevel++);
-		//QuizRules.setWordListLocation(Config.wordlist);
+		QuizRules.setStartLevel(Config.getStartLevel() + 1);
+		try {
+			QuizRules.setWordListLocation(Config.getWordListLocation());
+		} catch (FileNotFoundException e) {
+			System.err.println("Error finding wordlsit location");
+			e.printStackTrace();
+		}
 		changeScene("SpellScreen.fxml");
 	}
 
 	@FXML
 	public void handleRetry(ActionEvent ae){
 		QuizRules.setQuizType("New Quiz");
-		//QuizRules.setStartLevel(Config.startLevel);
-		//QuizRules.setWordListLocation(Config.wordlist);
+		QuizRules.setStartLevel(Config.getStartLevel());
+		try {
+			QuizRules.setWordListLocation(Config.getWordListLocation());
+		} catch (FileNotFoundException e) {
+			System.err.println("Error finding wordlsit location");
+			e.printStackTrace();
+		}
 		changeScene("SpellScreen.fxml");
 	}
 	
@@ -117,12 +129,18 @@ public class SummaryScreenController {
 	 * and processes them to create the summary screen view.
 	 * @param results
 	 */
-	public void setResults(QuizResults results){
-		if(results.getScore() > results.getNumWords() * 0.9 & results.getStreak() == results.getNumWords()){
+	public void setResults(QuizResults results){		
+		if(results.getScore() > results.answeredSize() * 0.9 & results.getStreak() == results.answeredSize()){
+			if(Config.isColourBlindMode()){
+				excellent.setTextFill(Color.BLUE);
+			}
 			excellent.setVisible(true);
-		}else if(results.getScore() > results.getNumWords() * 0.7){
+		}else if(results.getScore() > results.answeredSize() * 0.7){
+			if(Config.isColourBlindMode()){
+				good.setTextFill(Color.AQUA);
+			}
 			good.setVisible(true);
-		}else if(results.getScore() > results.getNumWords() * 0.5){
+		}else if(results.getScore() > results.answeredSize() * 0.5){
 			okay.setVisible(true);
 		}else{
 			poor.setVisible(true);
@@ -139,7 +157,7 @@ public class SummaryScreenController {
 			timeLabel.setText("Time: " + mins + ":" + timeInSeconds);			
 		}
 		levelLabel.setText("Level: " + results.getLevel());
-		if(results.getScore() > results.getNumWords() * 0.8){
+		if(results.getScore() > results.answeredSize() * 0.8){
 			playVideo.setVisible(true);
 		}
 		history.setCellFactory(new Callback<ListView<Result>, ListCell<Result>>(){
@@ -190,8 +208,11 @@ public class SummaryScreenController {
 			super.updateItem(item, empty);
 				if(item.getScore() == WordScore.FirstTry){
 					setText(item.getWord() + ":Correct");
-					//TODO add colorblind mode check.
-					setTextFill(Color.GREEN);
+					if(Config.isColourBlindMode()){
+						setTextFill(Color.BLUE);
+					}else{
+						setTextFill(Color.GREEN);
+					}
 				}else if(item.getScore() == WordScore.NotFirstTry){
 					setText(item.getWord() + ":Correct (" + item.getAttempts() + ")");
 					setTextFill(new Color(1.0, 0.4, 0, 1));

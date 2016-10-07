@@ -25,6 +25,10 @@ public class QuizResults {
 		results.add(new Result(word, score, attempts));
 	}
 	
+	public int answeredSize(){
+		return results.size();
+	}
+	
 	public Iterator<Result> iterator(){
 		return results.iterator();
 	}

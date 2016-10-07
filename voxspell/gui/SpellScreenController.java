@@ -13,7 +13,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import voxspell.Config;
 import voxspell.VoxSpell;
 import voxspell.festival.Festival;
 import voxspell.quiz.DummyQuiz;
@@ -61,6 +63,8 @@ public class SpellScreenController {
 	private Label scoreLabel;
 	@FXML
 	private Label previousEnterLabel;
+	@FXML
+	private Button endQuiz;
 
 	/**
 	 * Handles when the start quiz or submit button is pressed. Takes the entered word and uses the quiz to check its correctness.
@@ -70,8 +74,8 @@ public class SpellScreenController {
 	@FXML
 	public void	handleStartSubmitButtonPressed(ActionEvent ae){
 		if(!inQuiz){
+			quiz = new NewQuiz();
 			Festival.FestivalService serv = Festival.getInstance();
-			progressLabel.setText("Word 1/10");
 			wordUpTo = 1;
 			serv.announce("Starting new quiz");
 			serv.restart();
@@ -79,7 +83,12 @@ public class SpellScreenController {
 			spellZone.setDisable(false);
 			inQuiz = true;
 			startSubmit.setText("Submit");
-			quiz = new NewQuiz();
+			if(quiz.isInfinite()){
+				progressLabel.setVisible(false);
+				endQuiz.setVisible(true);
+			}
+			progressLabel.setText("Word 1/" + quiz.size());
+			levelLabel.setText("Level: " + quiz.getLevel());
 			quiz.speakWord();
 			startTime = System.currentTimeMillis();
 		}else{
@@ -106,6 +115,40 @@ public class SpellScreenController {
 				}
 				submit(answer);
 				spellZone.setText("");
+			}
+		}
+	}
+	
+	/**
+	 * Stops the quiz if the user is in an infinite quiz
+	 */
+	@FXML
+	public void handleStopQuizPressed(ActionEvent ae){
+		if(inQuiz){
+			endTime = System.currentTimeMillis();
+			results = quiz.getResults();
+			results.setTimeTaken(endTime - startTime);
+			if(highStreak == 0){
+				highStreak = streak;
+			}
+			results.setBestStreak(highStreak);
+			results.setScore(score);
+			results.setLevel(quiz.getLevel());
+			results.setNumWords(quiz.size());
+			
+			//Load next screen and pass information to controller
+			Stage primaryStage = VoxSpell.getMainStage();
+			try {
+				FXMLLoader loader = new FXMLLoader();
+				Parent root = loader.load(getClass().getResource("ScoreSummary.fxml").openStream());
+				SummaryScreenController controller = (SummaryScreenController)loader.getController();
+				//Parent root = FXMLLoader.load(getClass().getResource("ScoreSummary.fxml"));
+				controller.setResults(results);
+				Scene scene = new Scene(root);
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -166,7 +209,7 @@ public class SpellScreenController {
 			incorrect.setVisible(true);
 		}
 		spellZone.setText("");
-		progressLabel.setText("Word " + wordUpTo + "/10");
+		progressLabel.setText("Word " + wordUpTo + "/" + quiz.size());
 		previousEnterLabel.setText("You entered: " + answer);
 		scoreLabel.setText("Score: " + score);
 		streakLabel.setText("Streak: " + streak);
@@ -208,12 +251,9 @@ public class SpellScreenController {
 	 */
 	@FXML
 	public void initialize(){
-		quizTypeLabel.setText("Quiz: DummyQuiz");
-		//TODO: Check level
-		levelLabel.setText("Level: 1");
 		wordUpTo = 0;
 		//TODO should the progress label even be visible before a quiz starts?
-		progressLabel.setText("Word 0/10");
+		progressLabel.setVisible(false);
 		score = 0;
 		streak = 0;
 		QuizRules rules = QuizRules.getInstance();
@@ -222,6 +262,9 @@ public class SpellScreenController {
 		String[] path = listLocation.split("/");
 		String basename = path[path.length-1];
 		spellListLabel.setText(basename);
+		if(Config.isColourBlindMode()){
+			correct.setTextFill(Color.BLUE);
+		}
 	}
 	
 }

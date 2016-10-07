@@ -1,5 +1,6 @@
 package voxspell.gui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -8,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import voxspell.Config;
 import voxspell.VoxSpell;
 import voxspell.quiz.QuizRules;
 
@@ -23,8 +25,12 @@ public class MainMenuController {
 	public void handleStartQuizPressed(ActionEvent ae){
 		nextWindow = "SpellScreen.fxml";
 		QuizRules.setQuizType("New Quiz");
-		//QuizRules.setStartLevel(Config.startLevel);
-		//QuizRules.setWordListLocation(Config.wordlist);
+		QuizRules.setStartLevel(Config.getStartLevel());
+		try{
+		QuizRules.setWordListLocation(Config.getWordListLocation());
+		}catch(FileNotFoundException e){
+			System.err.println(e.getMessage());
+		}
 		changeScene();
 	}
 	
@@ -35,10 +41,17 @@ public class MainMenuController {
 	@FXML
 	public void handlePracticePressed(ActionEvent ae){
 		nextWindow = "SpellScreen.fxml";
-		QuizRules.setNumWordsInQuiz(-1);
+		QuizRules.setQuizType("Practice quiz");
+		QuizRules.setInfinite(true);
+		QuizRules.setNumWordsInQuiz(Integer.MAX_VALUE);
 		QuizRules.setNumChances(-1);
-		QuizRules.setStartLevel(Config.startLevel);
-		QuizRules.setWordListLocation(Config.wordlist);
+		QuizRules.setStartLevel(Config.getStartLevel());
+		QuizRules.setQuizType("Practice quiz");
+		try{
+		QuizRules.setWordListLocation(Config.getWordListLocation());
+		}catch(FileNotFoundException e){
+			System.err.println(e.getMessage());
+		}
 		changeScene();
 	}
 	

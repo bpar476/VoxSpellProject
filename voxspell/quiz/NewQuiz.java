@@ -29,6 +29,7 @@ public class NewQuiz {
 	private int numTries;
 	private QuizResults results;
 	private QuizRules rules;
+	private boolean infinite;
 	
 	/**
 	 * Constructor initialises quiz from given level. Creates 10 word list of words to spell from the
@@ -38,7 +39,23 @@ public class NewQuiz {
 	public NewQuiz(){
 		results = new QuizResults();
 		rules = QuizRules.getInstance();
-		WordList wordList = new WordList(rules.getWordListLocation(), rules.getStartLevel());
+		WordList wordList = new WordList(rules.getWordListLocation(), rules.getLevel());
+		//Set up wordList
+		wordsInLevel = wordList.getWordList();
+		wordsToQuiz = new ArrayList<>();
+		
+		Collections.shuffle(wordsInLevel);
+		for(int i = 0; i < rules.getNumWordsInQuiz() & i < wordsInLevel.size(); i++){
+			wordsToQuiz.add(wordsInLevel.get(i));
+		}
+		//Initialise some instance variables.
+		numTries = 0;
+	}
+	
+	public NewQuiz(int level){
+		results = new QuizResults();
+		rules = QuizRules.getInstance();
+		WordList wordList = new WordList(rules.getWordListLocation(), level);
 		//Set up wordList
 		wordsInLevel = wordList.getWordList();
 		wordsToQuiz = new ArrayList<>();
@@ -80,6 +97,11 @@ public class NewQuiz {
 			if(upToWordIndex == wordsToQuiz.size()-1){
 				//End of quiz, do not prompt for next word.
 				serv.announce("Correct");
+				if(isInfinite()){
+					serv.announce("Next word");
+					upToWordIndex = -1;
+					Collections.shuffle(wordsToQuiz);
+				}
 			}else{
 				serv.announce("Correct! Next word... ");
 			}
@@ -96,7 +118,7 @@ public class NewQuiz {
 				return CORRECT_NOT_FIRST_TRY;
 			}
 		}else{
-			if(numTries < rules.getNumChances()-1){
+			if(numTries < rules.getNumChances()-1 || rules.getNumChances() == -1){
 				serv.announce("Incorrect, try again");
 				serv.restart();
 				numTries++;
@@ -105,6 +127,11 @@ public class NewQuiz {
 				if(upToWordIndex == wordsToQuiz.size()-1){
 					//End of quiz, do not prompt for next word.
 					serv.announce("Incorrect");
+					if(isInfinite()){
+						serv.announce("Next word");
+						upToWordIndex = -1;
+						Collections.shuffle(wordsToQuiz);
+					}
 				}else{
 					serv.announce("Incorrect! Next word... ");
 				}
@@ -135,7 +162,7 @@ public class NewQuiz {
 	}
 	
 	public int getLevel(){
-		return rules.getStartLevel();
+		return rules.getLevel();
 	}
 	
 	/**
@@ -143,6 +170,14 @@ public class NewQuiz {
 	 */
 	public QuizResults getResults(){
 		return results;
+	}
+	
+	public boolean isInfinite(){
+		return rules.isInfinite();
+	}
+	
+	public String getType(){
+		return rules.getQuizType();
 	}
 	
 	/**

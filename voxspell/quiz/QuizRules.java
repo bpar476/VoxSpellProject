@@ -14,12 +14,14 @@ public class QuizRules {
 	private static boolean numSet;
 	private static boolean chanceSet;
 	private static boolean typeSet;
+	private static boolean infiniteSet;
 	
 	private String wordListLocation;
 	private String quizType;
 	private int startLevel;
 	private int numWordsInQuiz;
 	private int numChances;
+	private boolean infinite;
 	
 	public static void setWordListLocation(String location){
 		if(singleton == null){
@@ -34,6 +36,7 @@ public class QuizRules {
 			singleton = new QuizRules();
 		}
 		singleton.quizType = quizType;
+		typeSet = true;
 	}
 	
 	public static void setStartLevel(int level){
@@ -60,6 +63,14 @@ public class QuizRules {
 		chanceSet = true;
 	}
 	
+	public static void setInfinite(boolean inf){
+		if(singleton == null){
+			singleton = new QuizRules();
+		}
+		singleton.infinite = inf;
+		infiniteSet = true;
+	}
+	
 	/**
 	 * Resets all the fields in the QuizRules object.
 	 */
@@ -69,13 +80,18 @@ public class QuizRules {
 		levelSet = false;
 		locationSet = false;
 		numSet = false;
+		infiniteSet = false;
+	}
+	
+	public boolean isInfinite(){
+		return infinite;
 	}
 	
 	public String getWordListLocation() {
 		return wordListLocation;
 	}
 	
-	public int getStartLevel() {
+	public int getLevel() {
 		return startLevel;
 	}
 	
@@ -114,6 +130,9 @@ public class QuizRules {
 		}
 		if(!typeSet){
 			singleton.quizType = DEFAULT_QUIZ_TYPE;
+		}
+		if(!infiniteSet){
+			singleton.infinite = false;
 		}
 		return singleton;
 	}
