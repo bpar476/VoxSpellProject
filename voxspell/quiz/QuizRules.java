@@ -60,6 +60,9 @@ public class QuizRules {
 		chanceSet = true;
 	}
 	
+	/**
+	 * Resets all the fields in the QuizRules object.
+	 */
 	public static void reset(){
 		singleton = new QuizRules();
 		chanceSet = false;
@@ -68,6 +71,31 @@ public class QuizRules {
 		numSet = false;
 	}
 	
+	public String getWordListLocation() {
+		return wordListLocation;
+	}
+	
+	public int getStartLevel() {
+		return startLevel;
+	}
+	
+	public int getNumWordsInQuiz() {
+		return numWordsInQuiz;
+	}
+	
+	public int getNumChances() {
+		return numChances;
+	}
+	
+	public String getQuizType() {
+		return quizType;
+	}
+	
+	/**
+	 * Returns the singleton QuizRuels instance and gives it default values if certain
+	 * fields are not initialised.
+	 * @return
+	 */
 	public static QuizRules getInstance(){
 		if(singleton == null){
 			singleton = new QuizRules();
@@ -90,24 +118,5 @@ public class QuizRules {
 		return singleton;
 	}
 
-	public String getWordListLocation() {
-		return wordListLocation;
-	}
-
-	public int getStartLevel() {
-		return startLevel;
-	}
-
-	public int getNumWordsInQuiz() {
-		return numWordsInQuiz;
-	}
-
-	public int getNumChances() {
-		return numChances;
-	}
-
-	public String getQuizType() {
-		return quizType;
-	}
 
 }

@@ -202,12 +202,17 @@ public class SpellScreenController {
 		}
 	}
 
-
+	
+	/**
+	 * Called by JavaFX framework to set up controller.
+	 */
 	@FXML
 	public void initialize(){
 		quizTypeLabel.setText("Quiz: DummyQuiz");
+		//TODO: Check level
 		levelLabel.setText("Level: 1");
 		wordUpTo = 0;
+		//TODO should the progress label even be visible before a quiz starts?
 		progressLabel.setText("Word 0/10");
 		score = 0;
 		streak = 0;

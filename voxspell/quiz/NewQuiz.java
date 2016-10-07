@@ -82,16 +82,17 @@ public class NewQuiz {
 				serv.announce("Correct");
 			}else{
 				serv.announce("Correct! Next word... ");
-				numTries = 0;
 			}
 			upToWordIndex++;
 			if(numTries == 0){
 				serv.restart();
 				results.add(correctAnswer, WordScore.FirstTry, numTries);
+				numTries = 0;
 				return CORRECT_FIRST_TRY;
 			}else{
 				serv.restart();
 				results.add(correctAnswer, WordScore.NotFirstTry, numTries);
+				numTries = 0;
 				return CORRECT_NOT_FIRST_TRY;
 			}
 		}else{
@@ -129,9 +130,6 @@ public class NewQuiz {
 		return false;
 	}
 	
-	/**
-	 * @return The size of the spelling quiz.
-	 */
 	public int size(){
 		return wordsToQuiz.size();
 	}

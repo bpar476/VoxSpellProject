@@ -25,37 +25,18 @@ public class QuizResults {
 		results.add(new Result(word, score, attempts));
 	}
 	
-	
-	
-	/**
-	 * Returns an iterator over the results stored in this QuizResults object. The parts of these
-	 * results can be accessed throught the {@link Result#getWord()} and {@link Result#getScore()} methods.
-	 * @return
-	 */
 	public Iterator<Result> iterator(){
 		return results.iterator();
 	}
 	
-	/**
-	 * Sets the score achieved in the associated quiz.
-	 * @param score The final score of the user after finishing their quiz
-	 */
 	public void setScore(int score){
 		this.score = score;
 	}
 	
-	/**
-	 * Sets the best streak that a user achieved at the end of a quiz.
-	 * @param streak The user's best streak throughout the quiz.
-	 */
 	public void setBestStreak(int streak){
 		this.bestStreak = streak;
 	}
 	
-	/**
-	 * Sets the time the user took to complete the quiz.
-	 * @param time the time the user took to complete the quiz.
-	 */
 	public void setTimeTaken(Long time){
 		this.timeTaken = time;
 	}
@@ -88,6 +69,11 @@ public class QuizResults {
 		return level;
 	}
 	
+	/**
+	 * Nested class representing the a user's result for spelling a given word.
+	 * @author bpar
+	 *
+	 */
 	public class Result{
 		private String word;
 		private WordScore score;
