@@ -172,6 +172,7 @@ public class SpellScreenController {
 		streakLabel.setText("Streak: " + streak);
 		if(quiz.isEnded()){
 			endTime = System.currentTimeMillis();
+			results = quiz.getResults();
 			results.setTimeTaken(endTime - startTime);
 			if(highStreak == 0){
 				highStreak = streak;
@@ -204,7 +205,6 @@ public class SpellScreenController {
 
 	@FXML
 	public void initialize(){
-		results = new QuizResults();
 		quizTypeLabel.setText("Quiz: DummyQuiz");
 		levelLabel.setText("Level: 1");
 		wordUpTo = 0;

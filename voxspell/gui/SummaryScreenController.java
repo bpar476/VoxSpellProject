@@ -1,7 +1,10 @@
 package voxspell.gui;
 
 import java.io.IOException;
+import java.util.Iterator;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,13 +12,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import voxspell.VoxSpell;
 import voxspell.quiz.QuizResults;
+import voxspell.quiz.QuizResults.Result;
 import voxspell.quiz.QuizRules;
+import voxspell.quiz.WordScore;
 
 public class SummaryScreenController {
-	
+
 
 	//FXML fields
 	@FXML
@@ -36,8 +45,12 @@ public class SummaryScreenController {
 	private Label okay;
 	@FXML
 	private Label poor;
-	
-	
+	@FXML
+	private ListView<QuizResults.Result> history;
+
+	private ObservableList<Result> resultsList;
+
+
 	@FXML
 	public void handleNextLevel(ActionEvent ae){
 		QuizRules.setQuizType("New Quiz");
@@ -45,7 +58,7 @@ public class SummaryScreenController {
 		//QuizRules.setWordListLocation(Config.wordlist);
 		changeScene("SpellScreen.fxml");
 	}
-	
+
 	@FXML
 	public void handleRetry(ActionEvent ae){
 		QuizRules.setQuizType("New Quiz");
@@ -53,12 +66,12 @@ public class SummaryScreenController {
 		//QuizRules.setWordListLocation(Config.wordlist);
 		changeScene("SpellScreen.fxml");
 	}
-	
+
 	@FXML
 	public void handleMainMenu(ActionEvent ae){
 		changeScene("MainMenu.fxml");
 	}
-	
+
 	@FXML
 	public void handleRewardVideo(ActionEvent ae){
 		try {
@@ -72,7 +85,7 @@ public class SummaryScreenController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void changeScene(String fxmlFile){
 		Stage primaryStage = VoxSpell.getMainStage();
 		try {
@@ -84,7 +97,7 @@ public class SummaryScreenController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void setResults(QuizResults results){
 		if(results.getScore() > results.getNumWords() * 0.9 & results.getStreak() == results.getNumWords()){
 			excellent.setVisible(true);
@@ -95,7 +108,7 @@ public class SummaryScreenController {
 		}else{
 			poor.setVisible(true);
 		}
-		
+
 		scoreLabel.setText("Score: " + results.getScore());
 		streakLabel.setText("Best Streak: " + results.getStreak());
 		long timeInSeconds = results.getTime()/1000;
@@ -110,11 +123,41 @@ public class SummaryScreenController {
 		if(results.getScore() > results.getNumWords() * 0.8){
 			playVideo.setVisible(true);
 		}
+		history.setCellFactory(new Callback<ListView<Result>, ListCell<Result>>(){
+
+			@Override
+			public ListCell<Result> call(ListView<Result> arg0) {
+				return new WordCell();
+			}
+
+		});
+
+		resultsList = FXCollections.observableArrayList();
+		Iterator<Result> resultIt = results.iterator();
+		while(resultIt.hasNext()){
+			resultsList.add(resultIt.next());
+		}
+		history.setItems(resultsList);
+
 	}
-	
-	@FXML
-	public void initialize(){
-		
+
+	private class WordCell extends ListCell<Result>{
+		@Override
+		protected void updateItem(Result item, boolean empty){
+			if(item != null){
+			super.updateItem(item, empty);
+				if(item.getScore() == WordScore.FirstTry){
+					setText(item.getWord() + ": Correct");
+					setTextFill(Color.GREEN);
+				}else if(item.getScore() == WordScore.NotFirstTry){
+					setText(item.getWord() + ": Correct (" + item.getAttempts() + ")");
+					setTextFill(new Color(1.0, 0.4, 0, 1));
+				}else{
+					setText(item.getWord() + ": Wrong");
+					setTextFill(Color.RED);
+				}
+			}
+		}
 	}
-	
+
 }

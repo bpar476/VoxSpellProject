@@ -21,36 +21,11 @@ public class QuizResults {
 	 * @param word
 	 * @param score
 	 */
-	public void add(String word, WordScore score){
-		results.add(new Result(word, score));
+	public void add(String word, WordScore score, int attempts){
+		results.add(new Result(word, score, attempts));
 	}
 	
 	
-	public class Result{
-		private String word;
-		private WordScore score;
-		
-		public Result(String word, WordScore score){
-			this.word = word;
-			this.score = score;
-		}
-		
-		/**
-		 * Returns the word associated witht this spelling result.
-		 * @return
-		 */
-		public String getWord(){
-			return word;
-		}
-		
-		/**
-		 * Returns the score associated with this spelling result.
-		 * @return
-		 */
-		public WordScore getScore(){
-			return score;
-		}
-	}
 	
 	/**
 	 * Returns an iterator over the results stored in this QuizResults object. The parts of these
@@ -111,5 +86,40 @@ public class QuizResults {
 	
 	public int getLevel(){
 		return level;
+	}
+	
+	public class Result{
+		private String word;
+		private WordScore score;
+		private int attempts;
+		
+		public Result(String word, WordScore score, int attempts){
+			this.word = word;
+			this.score = score;
+			this.attempts = attempts;
+		}
+		
+		/**
+		 * Returns the word associated witht this spelling result.
+		 * @return
+		 */
+		public String getWord(){
+			return word;
+		}
+		
+		/**
+		 * Returns the score associated with this spelling result.
+		 * @return
+		 */
+		public WordScore getScore(){
+			return score;
+		}
+		
+		/**
+		 * Returns the number of times the user tried to spell the given word
+		 */
+		public int getAttempts(){
+			return attempts;
+		}
 	}
 }

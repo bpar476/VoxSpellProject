@@ -87,11 +87,11 @@ public class NewQuiz {
 			upToWordIndex++;
 			if(numTries == 0){
 				serv.restart();
-				results.add(correctAnswer, WordScore.FirstTry);
+				results.add(correctAnswer, WordScore.FirstTry, numTries);
 				return CORRECT_FIRST_TRY;
 			}else{
 				serv.restart();
-				results.add(correctAnswer, WordScore.NotFirstTry);
+				results.add(correctAnswer, WordScore.NotFirstTry, numTries);
 				return CORRECT_NOT_FIRST_TRY;
 			}
 		}else{
@@ -110,7 +110,7 @@ public class NewQuiz {
 				upToWordIndex++;
 				numTries = 0;
 				serv.restart();
-				results.add(correctAnswer, WordScore.Wrong);
+				results.add(correctAnswer, WordScore.Wrong, numTries);
 				return WRONG_LAST_TRY;
 			}
 		}
@@ -138,6 +138,13 @@ public class NewQuiz {
 	
 	public int getLevel(){
 		return rules.getStartLevel();
+	}
+	
+	/**
+	 * returns the results from this quiz
+	 */
+	public QuizResults getResults(){
+		return results;
 	}
 	
 	/**
