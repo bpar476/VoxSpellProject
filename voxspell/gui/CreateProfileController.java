@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import voxspell.VoxSpell;
@@ -27,6 +28,14 @@ public class CreateProfileController {
 	private TextField usernameField;
 	@FXML
 	private TextField passwordField;
+	@FXML
+	private TextField confirmPasswordField;
+	@FXML
+	private Label noUsername;
+	@FXML
+	private Label noPassword;
+	@FXML
+	private Label passwordMismatch;
 	
 	/**
 	 * Handles action for when the user clicks the "finished" button to finish creating their profile.
@@ -40,6 +49,7 @@ public class CreateProfileController {
 		noPassword.setVisible(false);
 		passwordMismatch.setVisible(false);
 		
+		String confirmedPassword = confirmPasswordField.getText();
 		String username = usernameField.getText();
 		String password = passwordField.getText();
 		if(username.equals("")){
@@ -49,7 +59,13 @@ public class CreateProfileController {
 		}else if(!password.equals(confirmedPassword)){
 			passwordMismatch.setVisible(true);
 		}else{
-			PrintWriter wr = new PrintWriter(new FileWriter(userInfoFile));
+			PrintWriter wr = null;
+			try {
+				wr = new PrintWriter(new FileWriter(userInfoFile));
+			} catch (IOException e) {
+				System.err.println("Fatal Error: unable to write to user info file.");
+				e.printStackTrace();
+			}
 			wr.append("\n" + username + ":" + password.hashCode());
 			wr.flush();
 			wr.close();
