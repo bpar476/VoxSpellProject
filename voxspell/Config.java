@@ -56,7 +56,7 @@ public class Config {
 			while((line = rdr.readLine()) != null){
 				String[] property = line.split("=");
 				if(property[0].equals("wordlist")){
-					return System.getProperty("user.dir") + "/.Resources/" + property[1];
+					return System.getProperty("user.dir") + "/.Resources/wordlists/" + property[1];
 				}
 			}
 		} catch (IOException e) {

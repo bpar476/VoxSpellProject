@@ -86,6 +86,8 @@ public class SpellScreenController {
 			if(quiz.isInfinite()){
 				progressLabel.setVisible(false);
 				endQuiz.setVisible(true);
+			}else{
+				progressLabel.setVisible(true);
 			}
 			progressLabel.setText("Word 1/" + quiz.size());
 			levelLabel.setText("Level: " + quiz.getLevel());
