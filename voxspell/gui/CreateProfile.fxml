@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="381.0" prefWidth="509.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Pane layoutX="-274.0" layoutY="-190.0" prefHeight="381.0" prefWidth="509.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="TOP_CENTER" layoutX="154.0" layoutY="25.0" prefHeight="33.0" prefWidth="180.0" text="New Speller">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="27.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="102.0" text="Pick a username to login with:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="152.0" prefHeight="15.0" prefWidth="222.0" text="Make a password:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="175.0" text="(Something easy to remember)">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField layoutX="300.0" layoutY="99.0" />
+            <TextField layoutX="300.0" layoutY="149.0" />
+            <Button layoutX="303.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" text="Finish">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="17.0" />
+               </font>
+            </Button>
+            <Button layoutX="27.0" layoutY="312.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="170.0" text="Cancel">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="17.0" />
+               </font>
+            </Button>
+            <Label layoutX="174.0" layoutY="68.0" prefHeight="15.0" prefWidth="149.0" text="No username entered" textFill="#f20606" visible="false" />
+            <Label layoutX="179.0" layoutY="68.0" text="No password entered" textFill="#eb0a0a" visible="false" />
+            <Label layoutX="173.0" layoutY="68.0" text="Passwords do no match" textFill="#f20b0b" visible="false" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

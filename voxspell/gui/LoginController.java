@@ -61,10 +61,11 @@ public class LoginController {
 
 		String line;
 		try {
+			rdr.readLine();
 			while((line = rdr.readLine())!=null){
-				String[] userData = line.split("=");
+				String[] userData = line.split(":");
 				if(usernameField.getText().equals(userData[0])){
-					if(passwordField.getText().equals(userData[1])){
+					if(passwordField.getText().hashCode() == Integer.parseInt(userData[1])){
 						//TODO Change to main menu scene and set current user in config class.
 
 						changeScene("MainMenu.fxml");
