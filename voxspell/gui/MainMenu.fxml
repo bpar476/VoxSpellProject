@@ -31,7 +31,7 @@
                   <Font name="DejaVu Sans Mono Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="35.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleQuitPressed" prefHeight="55.0" prefWidth="217.0" text="Quit">
+            <Button layoutX="35.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleLogoutPressed" prefHeight="55.0" prefWidth="217.0" text="Logout">
                <font>
                   <Font name="DejaVu Sans Mono Bold" size="16.0" />
                </font>

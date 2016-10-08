@@ -1,6 +1,9 @@
 package voxspell.gui;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,6 +39,8 @@ public class CreateProfileController {
 	private Label noPassword;
 	@FXML
 	private Label passwordMismatch;
+	@FXML
+	private Label usernameTaken;
 	
 	/**
 	 * Handles action for when the user clicks the "finished" button to finish creating their profile.
@@ -52,6 +57,28 @@ public class CreateProfileController {
 		String confirmedPassword = confirmPasswordField.getText();
 		String username = usernameField.getText();
 		String password = passwordField.getText();
+		try {
+			BufferedReader rdr = new BufferedReader(new FileReader(userInfoFile));
+			String line;
+			try {
+				while((line = rdr.readLine()) != null){
+					if(username.equals(line.split(":")[0])){
+						usernameTaken.setVisible(true);
+						return;
+					}
+				}
+			} catch (IOException e) {
+				System.err.println("Fatal error: unable to access user info file");
+			}
+		} catch (FileNotFoundException e1) {
+			try {
+				userInfoFile.createNewFile();
+			} catch (IOException e) {
+				System.err.println("Fatal error: unable to create/read user data file");
+				e.printStackTrace();
+			}
+		}
+		
 		if(username.equals("")){
 			noUsername.setVisible(true);
 		}else if(password.equals("")){
@@ -72,7 +99,11 @@ public class CreateProfileController {
 			changeScene("LoginScreen.fxml");
 		}
 	}
-
+	
+	/**
+	 * Takes user back to login screen if they decide they don't need to create an account.
+	 * @param ae
+	 */
 	@FXML
 	public void handleCancelPressed(ActionEvent ae){
 		changeScene("LoginScreen.fxml");

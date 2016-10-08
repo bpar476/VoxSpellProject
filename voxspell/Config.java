@@ -6,9 +6,28 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import voxspell.user.profile.User;
+
 public class Config {
 	
 	private final static File cfg = new File(System.getProperty("user.dir") + "/.Resources/voxspell.prop");
+	private static User usr;
+	
+	/**
+	 * Retrieves the active user.
+	 * @return
+	 */
+	public static User getUser(){
+		return usr;
+	}
+	
+	/**
+	 * Sets the active user.
+	 * @param user The user that is currently logged into the application.
+	 */
+	public static void setUser(User user){
+		usr = user;
+	}
 	
 	/**
 	 * Reads the config file and finds the start level. Returns it to caller.

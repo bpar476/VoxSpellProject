@@ -28,8 +28,8 @@
             </Label>
             <TextField fx:id="usernameField" layoutX="193.0" layoutY="97.0" />
             <TextField fx:id="passwordField" layoutX="193.0" layoutY="145.0" />
-            <Button fx:id="login" layoutX="256.0" layoutY="245.0" mnemonicParsing="false" prefWidth="107.0" text="Login" />
-            <Button fx:id="createProfile" layoutX="65.0" layoutY="245.0" mnemonicParsing="false" text="Create profile" />
+            <Button fx:id="login" layoutX="256.0" layoutY="245.0" mnemonicParsing="false" onAction="#handleLoginPressed" prefWidth="107.0" text="Login" />
+            <Button fx:id="createProfile" layoutX="65.0" layoutY="245.0" mnemonicParsing="false" onAction="#createProfilePressed" text="Create profile" />
             <Label fx:id="wrongPassword" layoutX="121.0" layoutY="65.0" text="Error: Incorrect password." textFill="#e80808" visible="false" />
             <Label fx:id="userNotRecognised" layoutX="117.0" layoutY="58.0" text="Error: Username does not exist" textFill="#fc0d0d" visible="false" />
          </children>

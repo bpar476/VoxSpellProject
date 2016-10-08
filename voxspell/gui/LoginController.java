@@ -15,7 +15,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import voxspell.Config;
 import voxspell.VoxSpell;
+import voxspell.user.profile.User;
 
 public class LoginController {
 
@@ -66,8 +68,8 @@ public class LoginController {
 				String[] userData = line.split(":");
 				if(usernameField.getText().equals(userData[0])){
 					if(passwordField.getText().hashCode() == Integer.parseInt(userData[1])){
-						//TODO Change to main menu scene and set current user in config class.
-
+						//TODO Make user state storable.
+						Config.setUser(new User(userData[0],"Bob"));
 						changeScene("MainMenu.fxml");
 						return;
 					}else{

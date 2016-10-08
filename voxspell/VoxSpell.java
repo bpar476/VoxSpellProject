@@ -56,7 +56,7 @@ public class VoxSpell extends Application {
 			e1.printStackTrace();
 		}
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("gui/MainMenu.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("gui/LoginScreen.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
