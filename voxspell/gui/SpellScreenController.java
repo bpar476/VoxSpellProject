@@ -227,6 +227,8 @@ public class SpellScreenController {
 			results.setLevel(quiz.getLevel());
 			results.setNumWords(quiz.size());
 			
+			Config.getUser().getHistory().add(results);
+			
 			//Load next screen and pass information to controller
 			Stage primaryStage = VoxSpell.getMainStage();
 			try {

@@ -310,8 +310,12 @@ public class SettingsController {
 			e.printStackTrace();
 		}finally{
 			try {
-				rdr.close();
-				levelReader.close();
+				if(rdr != null){
+					rdr.close();
+				}
+				if(levelReader != null){
+					levelReader.close();
+				}
 			} catch (IOException e) {
 				System.err.println("Unable to close IO streams");
 				e.printStackTrace();

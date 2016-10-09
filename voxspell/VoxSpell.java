@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import voxspell.festival.Festival;
+import voxspell.user.profile.User;
 
 /**
  * 
@@ -63,6 +64,10 @@ public class VoxSpell extends Application {
 				@Override
 				public void handle(WindowEvent event) {
 					Festival.getInstance().close();
+					User user = Config.getUser();
+					if(user != null){
+						user.write();
+					}
 				}
 
 			});

@@ -2,9 +2,12 @@ package voxspell.gui;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +27,8 @@ import voxspell.user.profile.User;
 
 public class LoginController {
 
-	private static File userInfo = new File(System.getProperty("user.dir") + "/.Resources/data/user_info.dat");
+	private static final String DATA_LOCATION = System.getProperty("user.dir") + "/.Resources/data/";
+	private static final File userInfo = new File(DATA_LOCATION + "user_info.dat");
 
 	@FXML
 	private Button login;
@@ -72,8 +76,25 @@ public class LoginController {
 				String[] userData = line.split(":");
 				if(usernameField.getText().equals(userData[0])){
 					if(passwordField.getText().hashCode() == Integer.parseInt(userData[1])){
-						//TODO Make user state storable.
-						Config.setUser(new User(userData[0],"Bob"));
+						User usr = null;
+						//Look for serialised user file.
+						File userObjectFile = new File(DATA_LOCATION + usernameField.getText() + ".ser");
+						if(userObjectFile.exists()){
+							//If it exists, read it and set it as the user.
+							FileInputStream fin = new FileInputStream(userObjectFile);
+							ObjectInputStream ois = new ObjectInputStream(fin);
+							try {
+								usr = (User) ois.readObject();
+								ois.close();
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}else{
+							//Otherwise create new user.
+							usr = new User(userData[0]);
+						}
+						Config.setUser(usr);
 						changeScene("MainMenu.fxml");
 						return;
 					}else{
@@ -95,7 +116,7 @@ public class LoginController {
 			}
 		}
 	}
-	
+
 	/**
 	 * Takes the user to a screen where they can create a new speller profile.
 	 * @param ae
@@ -104,7 +125,7 @@ public class LoginController {
 	public void createProfilePressed(ActionEvent ae){
 		changeScene("CreateProfile.fxml");
 	}
-	
+
 	@FXML
 	public void handleEnterPressed(KeyEvent ke){
 		if(ke.getCode() == KeyCode.ENTER){

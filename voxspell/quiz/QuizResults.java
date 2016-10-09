@@ -1,19 +1,24 @@
 package voxspell.quiz;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
-public class QuizResults {
+public class QuizResults implements Serializable{
 
+	private static final long serialVersionUID = 3992581471467692760L;
 	private ArrayList<Result> results;
 	private int bestStreak;
 	private int score;
 	private long timeTaken;
 	private int numWordsInQuiz;
 	private int level;
+	private Date dateCompleted;
 	
 	public QuizResults(){
 		results = new ArrayList<>();
+		dateCompleted = new Date();
 	}
 	
 	/**
@@ -73,12 +78,17 @@ public class QuizResults {
 		return level;
 	}
 	
+	public Date getDate(){
+		return dateCompleted;
+	}
+	
 	/**
 	 * Nested class representing the a user's result for spelling a given word.
 	 * @author bpar
 	 *
 	 */
-	public class Result{
+	public class Result implements Serializable{
+		private static final long serialVersionUID = 6912547030460845110L;
 		private String word;
 		private WordScore score;
 		private int attempts;
