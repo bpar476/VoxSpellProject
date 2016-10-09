@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="469.0" prefWidth="670.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <BorderPane layoutX="-221.0" layoutY="-165.0" prefHeight="469.0" prefWidth="670.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <Pane prefHeight="72.0" prefWidth="670.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="248.0" layoutY="21.0" prefHeight="35.0" prefWidth="168.0" text="Quiz History">
+                     <font>
+                        <Font name="DejaVu Sans Mono Bold" size="23.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <Pane BorderPane.alignment="CENTER">
+               <children>
+                  <TableView prefHeight="397.0" prefWidth="670.0">
+                    <columns>
+                      <TableColumn prefWidth="155.0" text="Date" />
+                      <TableColumn prefWidth="127.0" text="Quiz Type" />
+                        <TableColumn prefWidth="142.0" text="Word list" />
+                        <TableColumn prefWidth="121.0" text="Score" />
+                        <TableColumn prefWidth="123.0" text="Best Streak" />
+                    </columns>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </TableView>
+               </children>
+            </Pane>
+         </center>
+         <bottom>
+            <HBox prefHeight="65.0" prefWidth="670.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" text="Back">
+                     <HBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="DejaVu Sans Mono Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" text="More Details">
+                     <HBox.margin>
+                        <Insets left="470.0" top="20.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="DejaVu Sans Mono Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>
