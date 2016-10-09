@@ -45,6 +45,8 @@ public class LoginController {
 	 */
 	@FXML
 	public void handleLoginPressed(ActionEvent ae){
+		//TODO make login by enter possible
+		//TODO make password hidden
 		wrongPassword.setVisible(false);
 		userNotRecognised.setVisible(false);
 		BufferedReader rdr = null;
