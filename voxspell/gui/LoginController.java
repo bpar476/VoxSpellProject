@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import voxspell.Config;
@@ -34,7 +35,7 @@ public class LoginController {
 	@FXML
 	private TextField usernameField;
 	@FXML
-	private TextField passwordField;
+	private PasswordField passwordField;
 
 	/**
 	 * Handles logic for when user presses login button. Looks through user data file to find entered username.

@@ -205,33 +205,6 @@ public class SummaryScreenController {
 		}
 	}
 	
-	/*
-	 * Hidden class to handle logic for filling the list. Colours words depending on
-	 * the user's score.
-	 */
-	private class WordCell extends ListCell<Result>{
-		@Override
-		protected void updateItem(Result item, boolean empty){
-			if(item != null){
-			super.updateItem(item, empty);
-				if(item.getScore() == WordScore.FirstTry){
-					setText(item.getWord() + ":Correct");
-					if(Config.isColourBlindMode()){
-						setTextFill(Color.BLUE);
-					}else{
-						setTextFill(Color.GREEN);
-					}
-				}else if(item.getScore() == WordScore.NotFirstTry){
-					setText(item.getWord() + ":Correct (" + item.getAttempts() + ")");
-					setTextFill(new Color(1.0, 0.4, 0, 1));
-				}else{
-					setText(item.getWord() + " :Wrong");
-					setTextFill(Color.RED);
-				}
-			}
-		}
-	}
-	
 	@FXML
 	public void initialize(){
 		rewardSong = new Media("file:///" + REWARD_SONG_LOCATION);
