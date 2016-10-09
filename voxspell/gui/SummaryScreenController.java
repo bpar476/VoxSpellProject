@@ -4,9 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 
-import com.sun.javafx.application.HostServicesDelegate;
-
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,9 +16,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import voxspell.Config;
 import voxspell.VoxSpell;
 import voxspell.quiz.QuizResults;
@@ -31,6 +31,7 @@ import voxspell.quiz.WordScore;
 
 public class SummaryScreenController {
 
+	private static final String REWARD_SONG_LOCATION = System.getProperty("user.dir") + "/.Resources/media/milky-chu_-_With_You_And_Icecream_Flying_-_cut.mp3";
 
 	//FXML fields
 	@FXML
@@ -53,6 +54,10 @@ public class SummaryScreenController {
 	private Label poor;
 	@FXML
 	private ListView<QuizResults.Result> history;
+	
+	private Media rewardSong;
+	private MediaPlayer rewardSongPlayer;
+	
 
 	private ObservableList<Result> resultsList;
 
@@ -105,7 +110,9 @@ public class SummaryScreenController {
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.hide();
+			rewardSongPlayer.pause();
 			stage.showAndWait();
+			rewardSongPlayer.play();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -113,6 +120,7 @@ public class SummaryScreenController {
 
 	//Helper method to change the scene.
 	private void changeScene(String fxmlFile){
+		rewardSongPlayer.stop();
 		Stage primaryStage = VoxSpell.getMainStage();
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
@@ -222,6 +230,21 @@ public class SummaryScreenController {
 				}
 			}
 		}
+	}
+	
+	@FXML
+	public void initialize(){
+		rewardSong = new Media("file:///" + REWARD_SONG_LOCATION);
+		rewardSongPlayer = new MediaPlayer(rewardSong);
+		rewardSongPlayer.setOnEndOfMedia(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				rewardSongPlayer.seek(Duration.ZERO);
+			}
+		});;
+		rewardSongPlayer.play();
 	}
 
 }

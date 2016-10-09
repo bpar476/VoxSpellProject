@@ -21,7 +21,7 @@ import voxspell.VoxSpell;
 
 public class CreateProfileController {
 
-	private static File userInfoFile = new File(System.getProperty("user.dir") + "/.Resources/user_info.dat");
+	private static File userInfoFile = new File(System.getProperty("user.dir") + "/.Resources/data/user_info.dat");
 
 	@FXML
 	private Button cancel;

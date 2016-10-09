@@ -79,7 +79,7 @@ public class RewardPlayerController {
 	@FXML
 	public void initialize(){
 		String dir = System.getProperty("user.dir");
-		bunnyVid = new Media("file:///" + dir +"/.Resources/big_buck_bunny_1_minute.mp4");
+		bunnyVid = new Media("file:///" + dir +"/.Resources/media/big_buck_bunny_1_minute.mp4");
 		bunnyPlayer = new MediaPlayer(bunnyVid);
 		bunnyViewer.setMediaPlayer(bunnyPlayer);
 		closeBehaviourSet = false;

@@ -37,7 +37,7 @@ public class VoxSpell extends Application {
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException {
 		mainStage = primaryStage;
-		BufferedReader rdr = new BufferedReader(new FileReader(new File(System.getProperty("user.dir") + "/.Resources/voxspell.prop")));
+		BufferedReader rdr = new BufferedReader(new FileReader(new File(System.getProperty("user.dir") + "/.Resources/data/voxspell.prop")));
 		String line;
 		try {
 			while((line = rdr.readLine()) != null){

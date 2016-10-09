@@ -21,7 +21,7 @@ import voxspell.user.profile.User;
 
 public class LoginController {
 
-	private static File userInfo = new File(System.getProperty("user.dir") + "/.Resources/user_info.dat");
+	private static File userInfo = new File(System.getProperty("user.dir") + "/.Resources/data/user_info.dat");
 
 	@FXML
 	private Button login;

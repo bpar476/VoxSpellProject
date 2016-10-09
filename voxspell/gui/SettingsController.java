@@ -23,6 +23,9 @@ import voxspell.festival.Festival;
 
 public class SettingsController {
 
+	private static final String WORDLIST_EXTENSION = "/.Resources/wordlists/";
+	private static final String PROPERTIES_EXTENSION = "/.Resources/data/voxspell.prop"; 
+	
 	@FXML
 	private RadioButton colourBlindSelector;
 	@FXML
@@ -103,7 +106,7 @@ public class SettingsController {
 		String voice = voicesBox.getSelectionModel().getSelectedItem();
 
 		try {
-			File voxspellProp = new File(System.getProperty("user.dir") + "/.Resources/voxspell.prop");
+			File voxspellProp = new File(System.getProperty("user.dir") + PROPERTIES_EXTENSION);
 			voxspellProp.delete();
 			voxspellProp.createNewFile();
 			PrintWriter wr = new PrintWriter(voxspellProp);
@@ -139,7 +142,7 @@ public class SettingsController {
 		voicesBox.setPromptText("Select a voice for reading words");
 		//Set word lists combo box;
 		ObservableList<File> wordLists = FXCollections.observableArrayList();
-		File wordListDir = new File(System.getProperty("user.dir") + "/.Resources/wordlists");
+		File wordListDir = new File(System.getProperty("user.dir") + WORDLIST_EXTENSION);
 		for(File wordlist : wordListDir.listFiles()){
 			wordLists.add(wordlist);
 		}		
@@ -149,17 +152,17 @@ public class SettingsController {
 		BufferedReader rdr = null;
 		BufferedReader levelReader = null;
 		try {
-			rdr = new BufferedReader(new FileReader( new File(System.getProperty("user.dir")+"/.Resources/voxspell.prop")));
+			rdr = new BufferedReader(new FileReader( new File(System.getProperty("user.dir")+ PROPERTIES_EXTENSION)));
 			String line;
 			while((line = rdr.readLine()) != null){
 				String[] property = line.split("=");
 				if(property[0].equals("voice")){
 					voicesBox.getSelectionModel().select(property[1]);
 				}else if(property[0].equals("wordlist")){
-					wordListsBox.getSelectionModel().select(new File(System.getProperty("user.dir") + "/.Resources/wordlists/" + property[1]));
+					wordListsBox.getSelectionModel().select(new File(System.getProperty("user.dir") + WORDLIST_EXTENSION + property[1]));
 					String levelLine = null;
 					ObservableList<String> levels = FXCollections.observableArrayList();
-					levelReader = new BufferedReader(new FileReader(new File(System.getProperty("user.dir") + "/.Resources/wordlists/" + property[1])));
+					levelReader = new BufferedReader(new FileReader(new File(System.getProperty("user.dir") + WORDLIST_EXTENSION + property[1])));
 					while((levelLine = levelReader.readLine()) != null){
 						if(levelLine.charAt(0) == '%'){
 							String[] splitLev = levelLine.split("\\s+");

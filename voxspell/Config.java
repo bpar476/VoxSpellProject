@@ -10,7 +10,7 @@ import voxspell.user.profile.User;
 
 public class Config {
 	
-	private final static File cfg = new File(System.getProperty("user.dir") + "/.Resources/voxspell.prop");
+	private final static File cfg = new File(System.getProperty("user.dir") + "/.Resources/data/voxspell.prop");
 	private static User usr;
 	
 	/**
