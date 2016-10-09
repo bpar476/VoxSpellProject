@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import voxspell.Config;
 import voxspell.VoxSpell;
@@ -47,7 +49,6 @@ public class LoginController {
 	@FXML
 	public void handleLoginPressed(ActionEvent ae){
 		//TODO make login by enter possible
-		//TODO make password hidden
 		wrongPassword.setVisible(false);
 		userNotRecognised.setVisible(false);
 		BufferedReader rdr = null;
@@ -102,6 +103,13 @@ public class LoginController {
 	@FXML
 	public void createProfilePressed(ActionEvent ae){
 		changeScene("CreateProfile.fxml");
+	}
+	
+	@FXML
+	public void handleEnterPressed(KeyEvent ke){
+		if(ke.getCode() == KeyCode.ENTER){
+			handleLoginPressed(new ActionEvent());
+		}
 	}
 
 	//Helper method to change the scene.

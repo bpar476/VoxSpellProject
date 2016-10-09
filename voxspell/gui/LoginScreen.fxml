@@ -27,7 +27,7 @@
                </font>
             </Label>
             <TextField fx:id="usernameField" layoutX="193.0" layoutY="97.0" />
-            <PasswordField fx:id="passwordField" layoutX="193.0" layoutY="145.0" />
+            <PasswordField fx:id="passwordField" layoutX="193.0" layoutY="145.0" onKeyPressed="#handleEnterPressed"/>
             <Button fx:id="login" layoutX="256.0" layoutY="245.0" mnemonicParsing="false" onAction="#handleLoginPressed" prefWidth="107.0" text="Login" />
             <Button fx:id="createProfile" layoutX="65.0" layoutY="245.0" mnemonicParsing="false" onAction="#createProfilePressed" text="Create profile" />
             <Label fx:id="wrongPassword" layoutX="121.0" layoutY="65.0" text="Error: Incorrect password." textFill="#e80808" visible="false" />
