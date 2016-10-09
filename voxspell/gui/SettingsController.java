@@ -49,6 +49,21 @@ public class SettingsController {
 	 */
 	@FXML
 	public void mainMenuButtonPressed(ActionEvent ae){
+		BufferedReader rdr = null;
+		try{
+			rdr = new BufferedReader(new FileReader(System.getProperty("user.dir") + PROPERTIES_EXTENSION));
+			String line;
+			while((line = rdr.readLine()) != null){
+				String[] splitProperty = line.split("=");
+				//TODO check if changes have been made so as to make confirmation before leaving.
+				if(splitProperty[0].equals("voice")){
+					
+				}
+			}
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
 		Stage primaryStage = VoxSpell.getMainStage();
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
@@ -104,7 +119,7 @@ public class SettingsController {
 		String wordList = wordListsBox.getSelectionModel().getSelectedItem().getName();
 		String startLevel = startDifficultyBox.getSelectionModel().getSelectedItem();
 		String voice = voicesBox.getSelectionModel().getSelectedItem();
-
+		
 		try {
 			File voxspellProp = new File(System.getProperty("user.dir") + PROPERTIES_EXTENSION);
 			voxspellProp.delete();
