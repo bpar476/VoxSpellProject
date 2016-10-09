@@ -1,6 +1,7 @@
 package voxspell.gui;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -106,6 +107,13 @@ public class SettingsController {
 			}
 		}catch(IOException e){
 			e.printStackTrace();
+		}finally{
+			try {
+				rdr.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		Stage primaryStage = VoxSpell.getMainStage();
@@ -144,30 +152,33 @@ public class SettingsController {
 		confirmedNotification.setVisible(false);
 		ObservableList<String> levels = FXCollections.observableArrayList();
 		BufferedReader rdr = null;
-		try {
-			rdr = new BufferedReader(new FileReader(wordListsBox.getValue()));
-		} catch (FileNotFoundException e) {
-			System.err.println("Error: File: " + wordListsBox.getValue() + " not found");
-			return;
-		}
-
-		String line = null;
-		try {
-			while((line = rdr.readLine()) != null){
-				if(line.charAt(0) == '%'){
-					String[] levelLine = line.split("\\s+");
-					levels.add(levelLine[1]);
-				}
+		if(wordListsBox.getValue() != null){
+			try {
+				rdr = new BufferedReader(new FileReader(wordListsBox.getValue()));
+			} catch (FileNotFoundException e) {
+				System.err.println("Error: File: " + wordListsBox.getValue() + " not found");
+				return;
 			}
-			rdr.close();
-		} catch (IOException e) {
-			System.err.println("Error reading file: " + wordListsBox.getValue());
-			return;
-		}
 
-		startDifficultyBox.setItems(levels);
-		startDifficultyBox.getSelectionModel().select(0);
+			String line = null;
+			try {
+				while((line = rdr.readLine()) != null){
+					if(line.charAt(0) == '%'){
+						String[] levelLine = line.split("\\s+");
+						levels.add(levelLine[1]);
+					}
+				}
+				rdr.close();
+			} catch (IOException e) {
+				System.err.println("Error reading file: " + wordListsBox.getValue());
+				return;
+			}
+
+			startDifficultyBox.setItems(levels);
+			startDifficultyBox.getSelectionModel().select(0);
+		}
 	}
+
 
 	@FXML
 	public void confirmPressed(ActionEvent ae){
@@ -208,7 +219,21 @@ public class SettingsController {
 		st.setTitle("Select a spelling list to add to your library");
 		File wordList = chooser.showOpenDialog(st);
 		if(wordList != null){
-			wordList.renameTo(new File(System.getProperty("user.dir") + WORDLIST_EXTENSION + wordList.getName()));
+			File wordListCopy = new File(System.getProperty("user.dir") + WORDLIST_EXTENSION + wordList.getName());
+			try {
+				BufferedReader rdr = new BufferedReader(new FileReader(wordList));
+				BufferedWriter wr = new BufferedWriter(new PrintWriter(wordListCopy));
+				String line;
+				while((line = rdr.readLine())!=null){
+					wr.append(line);
+					wr.newLine();
+				}
+				wr.flush();
+				wr.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			ObservableList<File> wordLists = FXCollections.observableArrayList();
 			File wordListDir = new File(System.getProperty("user.dir") + WORDLIST_EXTENSION);
 			for(File wordlist : wordListDir.listFiles()){
@@ -217,7 +242,7 @@ public class SettingsController {
 			wordListsBox.setItems(wordLists);
 		}
 	}
-	
+
 	/**
 	 * Sets up values in combo boxes when scene is loaded.
 	 */
@@ -241,7 +266,7 @@ public class SettingsController {
 			public ListCell<File> call(ListView<File> arg0) {
 				return new FileCell();
 			}
-			
+
 		});
 		wordListsBox.setButtonCell(new FileCell());
 		wordListsBox.setItems(wordLists);
