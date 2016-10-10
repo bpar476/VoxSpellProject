@@ -29,6 +29,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import voxspell.Config;
 import voxspell.VoxSpell;
 import voxspell.festival.Festival;
 
@@ -209,7 +210,9 @@ public class SettingsController {
 				while((line = rdr.readLine()) != null){
 					if(line.charAt(0) == '%'){
 						String[] levelLine = line.split("\\s+");
-						levels.add(levelLine[1]);
+						if(Integer.parseInt(levelLine[1]) <= Config.getUser().getHighestLevel()){
+							levels.add(levelLine[1]);
+						}
 					}
 				}
 				rdr.close();
@@ -334,7 +337,9 @@ public class SettingsController {
 					while((levelLine = levelReader.readLine()) != null){
 						if(levelLine.charAt(0) == '%'){
 							String[] splitLev = levelLine.split("\\s+");
-							levels.add(splitLev[1]);
+							if(Integer.parseInt(splitLev[1]) <= Config.getUser().getHighestLevel()){
+								levels.add(splitLev[1]);
+							}
 						}
 					}
 					startDifficultyBox.setItems(levels);
