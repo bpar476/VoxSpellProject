@@ -238,7 +238,7 @@ public class SpellScreenController {
 			
 			User usr = Config.getUser();
 			if(result > usr.getBestScore()){
-				usr.setBestScore(result);
+				usr.setBestScore(score);
 				usr.setBestWordList(listLocation[listLocation.length-1]);
 			}
 			if(highStreak > usr.getBestStreak()){
