@@ -1,6 +1,5 @@
 package voxspell.gui;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -27,7 +26,6 @@ import voxspell.VoxSpell;
 import voxspell.quiz.QuizResults;
 import voxspell.quiz.QuizResults.Result;
 import voxspell.quiz.QuizRules;
-import voxspell.quiz.WordScore;
 
 public class SummaryScreenController {
 
@@ -65,13 +63,8 @@ public class SummaryScreenController {
 	@FXML
 	public void handleNextLevel(ActionEvent ae){
 		QuizRules.setQuizType("New Quiz");
-		QuizRules.setStartLevel(Config.getStartLevel() + 1);
-		try {
-			QuizRules.setWordListLocation(Config.getWordListLocation());
-		} catch (FileNotFoundException e) {
-			System.err.println("Error finding wordlsit location");
-			e.printStackTrace();
-		}
+		QuizRules.setStartLevel(QuizRules.getInstance().getLevel() + 1);
+		QuizRules.setWordListLocation(Config.getWordListLocation());
 		changeScene("SpellScreen.fxml");
 	}
 
@@ -79,12 +72,7 @@ public class SummaryScreenController {
 	public void handleRetry(ActionEvent ae){
 		QuizRules.setQuizType("New Quiz");
 		QuizRules.setStartLevel(Config.getStartLevel());
-		try {
-			QuizRules.setWordListLocation(Config.getWordListLocation());
-		} catch (FileNotFoundException e) {
-			System.err.println("Error finding wordlsit location");
-			e.printStackTrace();
-		}
+		QuizRules.setWordListLocation(Config.getWordListLocation());
 		changeScene("SpellScreen.fxml");
 	}
 	
@@ -94,6 +82,7 @@ public class SummaryScreenController {
 	 */
 	@FXML
 	public void handleMainMenu(ActionEvent ae){
+		QuizRules.reset();
 		changeScene("MainMenu.fxml");
 	}
 	

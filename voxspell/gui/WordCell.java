@@ -17,17 +17,17 @@ public class WordCell extends ListCell<Result>{
 		if(item != null){
 			super.updateItem(item, empty);
 			if(item.getScore() == WordScore.FirstTry){
-				setText(item.getWord() + ":Correct");
+				setText(item.getWord() + ": Correct");
 				if(Config.isColourBlindMode()){
 					setTextFill(Color.BLUE);
 				}else{
 					setTextFill(Color.GREEN);
 				}
 			}else if(item.getScore() == WordScore.NotFirstTry){
-				setText(item.getWord() + ":Correct (" + item.getAttempts() + ")");
+				setText(item.getWord() + " : Correct (" + item.getAttempts() + ")");
 				setTextFill(new Color(1.0, 0.4, 0, 1));
 			}else{
-				setText(item.getWord() + " :Wrong");
+				setText(item.getWord() + " : Wrong");
 				setTextFill(Color.RED);
 			}
 		}

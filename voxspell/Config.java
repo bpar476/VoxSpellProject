@@ -62,7 +62,7 @@ public class Config {
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	public static String getWordListLocation() throws FileNotFoundException{
+	public static String getWordListLocation(){
 		BufferedReader rdr = null;
 		try {
 			rdr = new BufferedReader(new FileReader(cfg));
@@ -82,7 +82,7 @@ public class Config {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		throw new FileNotFoundException("Error: Word list location not specified in config file");
+		return null;
 	}
 	
 	/**

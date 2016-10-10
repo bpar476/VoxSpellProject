@@ -14,10 +14,46 @@ public class User implements Serializable{
 	private static final long serialVersionUID = -4799555998018565833L;
 	private QuizHistory history;
 	private String username;
+	private int bestScore;
+	private int bestStreak;
+	private String bestWordList;
+	private int highestLevel;
 	
 	public User(String username){
 		history = new QuizHistory(this);
 		this.username = username;
+	}
+	
+	public int getHighestLevel(){
+		return highestLevel;
+	}
+	
+	public int getBestScore(){
+		return bestScore;
+	}
+	
+	public int getBestStreak(){
+		return bestStreak;
+	}
+	
+	public String getBestList(){
+		return bestWordList;
+	}
+	
+	public void setHighestLevel(int level){
+		highestLevel = level;
+	}
+	
+	public void setBestScore(int score){
+		bestScore = score;
+	}
+	
+	public void setBestWordList(String listname){
+		bestWordList = listname;
+	}
+	
+	public void setBestStreak(int streak){
+		bestStreak = streak;
 	}
 	
 	@Override

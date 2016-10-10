@@ -80,6 +80,17 @@ public class SettingsController {
 						Optional<ButtonType> result = confirmDeparture.showAndWait();
 						if(result.get() == ButtonType.CANCEL){
 							return;
+						}else{
+							Stage primaryStage = VoxSpell.getMainStage();
+							try {
+								Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+								Scene scene = new Scene(root);
+								primaryStage.setScene(scene);
+								primaryStage.show();
+								return;
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 				}else if(splitProperty[0].equals("wordlist")){
@@ -87,6 +98,17 @@ public class SettingsController {
 						Optional<ButtonType> result = confirmDeparture.showAndWait();
 						if(result.get() == ButtonType.CANCEL){
 							return;
+						}else{
+							Stage primaryStage = VoxSpell.getMainStage();
+							try {
+								Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+								Scene scene = new Scene(root);
+								primaryStage.setScene(scene);
+								primaryStage.show();
+								return;
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 				}else if(splitProperty[0].equals("startlevel")){
@@ -94,6 +116,17 @@ public class SettingsController {
 						Optional<ButtonType> result = confirmDeparture.showAndWait();
 						if(result.get() == ButtonType.CANCEL){
 							return;
+						}else{
+							Stage primaryStage = VoxSpell.getMainStage();
+							try {
+								Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+								Scene scene = new Scene(root);
+								primaryStage.setScene(scene);
+								primaryStage.show();
+								return;
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 				}else if(splitProperty[0].equals("colourblind")){
@@ -101,6 +134,17 @@ public class SettingsController {
 						Optional<ButtonType> result = confirmDeparture.showAndWait();
 						if(result.get() == ButtonType.CANCEL){
 							return;
+						}else{
+							Stage primaryStage = VoxSpell.getMainStage();
+							try {
+								Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+								Scene scene = new Scene(root);
+								primaryStage.setScene(scene);
+								primaryStage.show();
+								return;
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 				}

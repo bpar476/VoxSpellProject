@@ -12,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import voxspell.Config;
@@ -22,6 +21,7 @@ import voxspell.quiz.DummyQuiz;
 import voxspell.quiz.NewQuiz;
 import voxspell.quiz.QuizResults;
 import voxspell.quiz.QuizRules;
+import voxspell.user.profile.User;
 
 public class SpellScreenController {
 
@@ -138,6 +138,8 @@ public class SpellScreenController {
 			results.setLevel(quiz.getLevel());
 			results.setNumWords(quiz.size());
 			
+			Config.getUser().getHistory().add(results);
+						
 			//Load next screen and pass information to controller
 			Stage primaryStage = VoxSpell.getMainStage();
 			try {
@@ -172,6 +174,7 @@ public class SpellScreenController {
 	@FXML
 	public void handleMainMenuPressed(ActionEvent ae){
 		Stage primaryStage = VoxSpell.getMainStage();
+		QuizRules.reset();
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 			Scene scene = new Scene(root);
@@ -227,8 +230,20 @@ public class SpellScreenController {
 			results.setLevel(quiz.getLevel());
 			results.setNumWords(quiz.size());
 			
-			Config.getUser().getHistory().add(results);
-			
+			User usr = Config.getUser();
+			if(result > usr.getBestScore()){
+				usr.setBestScore(result);
+				String[] listLocation = Config.getWordListLocation().split("/");
+				usr.setBestWordList(listLocation[listLocation.length-1]);
+			}
+			if(highStreak > usr.getBestStreak()){
+				usr.setBestStreak(highStreak);
+			}
+			if(quiz.getLevel() > usr.getHighestLevel()){
+				usr.setHighestLevel(quiz.getLevel());
+			}
+			usr.getHistory().add(results);
+						
 			//Load next screen and pass information to controller
 			Stage primaryStage = VoxSpell.getMainStage();
 			try {

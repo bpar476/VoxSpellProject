@@ -26,11 +26,7 @@ public class MainMenuController {
 		nextWindow = "SpellScreen.fxml";
 		QuizRules.setQuizType("New Quiz");
 		QuizRules.setStartLevel(Config.getStartLevel());
-		try{
 		QuizRules.setWordListLocation(Config.getWordListLocation());
-		}catch(FileNotFoundException e){
-			System.err.println(e.getMessage());
-		}
 		changeScene();
 	}
 	
@@ -47,11 +43,7 @@ public class MainMenuController {
 		QuizRules.setNumChances(-1);
 		QuizRules.setStartLevel(Config.getStartLevel());
 		QuizRules.setQuizType("Practice quiz");
-		try{
 		QuizRules.setWordListLocation(Config.getWordListLocation());
-		}catch(FileNotFoundException e){
-			System.err.println(e.getMessage());
-		}
 		changeScene();
 	}
 	

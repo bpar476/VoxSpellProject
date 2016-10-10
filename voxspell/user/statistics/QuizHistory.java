@@ -1,12 +1,8 @@
 package voxspell.user.statistics;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import voxspell.quiz.QuizResults;
 import voxspell.user.profile.User;
@@ -31,5 +27,13 @@ public class QuizHistory implements Serializable{
 			history.remove(0);
 		}
 		history.add(result);
+	}
+	
+	/**
+	 * Returns an iterator to iterate over all the quiz results in this QuizHistory object.
+	 * @return
+	 */
+	public Iterator<QuizResults> iterator(){
+		return history.iterator();
 	}
 }

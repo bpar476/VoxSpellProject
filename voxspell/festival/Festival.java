@@ -89,7 +89,7 @@ public class Festival {
 		 * Schedules the speech speed to be slowed down for speaking a spelling word in a quiz.
 		 */
 		public void spellSpeed(){
-			setCommand("(Parameter.set `Duration_Stretch 2.2)");
+			setCommand("(Parameter.set `Duration_Stretch 2.0)");
 		}
 		
 		/**
