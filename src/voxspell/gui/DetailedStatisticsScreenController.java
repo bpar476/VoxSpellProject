@@ -69,7 +69,7 @@ public class DetailedStatisticsScreenController {
 			Parent root = loader.load(getClass().getResource("ScoreSummary.fxml").openStream());
 			SummaryScreenController controller = (SummaryScreenController)loader.getController();
 			//TODO Get results from table
-			//---->controller.setResults(results);			
+			controller.setResults(quizTable.getSelectionModel().getSelectedItem());			
 			
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
