@@ -27,9 +27,9 @@ public class DetailedStatisticsScreenController {
 	@FXML
 	private TableColumn dateCol;
 	@FXML
-	private TableColumn typeCol;
+	private TableColumn<QuizResults,String> typeCol;
 	@FXML
-	private TableColumn listCol;
+	private TableColumn<QuizResults,String> listCol;
 	@FXML
 	private TableColumn scoreCol;
 	@FXML
@@ -87,8 +87,8 @@ public class DetailedStatisticsScreenController {
 	private void fillTable(){
 		final ObservableList<QuizResults> data = FXCollections.observableArrayList();
 		dateCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Date>("dateCompleted"));
-		typeCol.setCellValueFactory(new PropertyValueFactory<QuizResults,String>("quizType"));
-		listCol.setCellValueFactory(new PropertyValueFactory<QuizResults,String>("wordlist"));
+		typeCol.setCellValueFactory(cellData -> cellData.getValue().getQuizTypeProperty());
+		listCol.setCellValueFactory(cellData -> cellData.getValue().getWordlistProperty());
 		scoreCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Number>("score"));
 		streakCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Number>("bestStreak"));
 		
