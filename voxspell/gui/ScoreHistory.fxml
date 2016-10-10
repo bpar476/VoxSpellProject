@@ -14,7 +14,7 @@
          <children>
             <BorderPane prefHeight="268.0" prefWidth="272.0" HBox.hgrow="ALWAYS">
                <bottom>
-                  <Button fx:id="fullHistoryButton" mnemonicParsing="false" text="Full History" BorderPane.alignment="CENTER_LEFT">
+                  <Button fx:id="fullHistoryButton" mnemonicParsing="false" onAction="#handleFullDetailPressed" text="Full History" BorderPane.alignment="CENTER_LEFT">
                      <font>
                         <Font name="DejaVu Sans Mono Bold" size="14.0" />
                      </font>

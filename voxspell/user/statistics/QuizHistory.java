@@ -29,6 +29,13 @@ public class QuizHistory implements Serializable{
 		history.add(result);
 	}
 	
+	public void refresh(){
+		for(QuizResults res : history){
+			res.setQuizType(res.getTrueQuizType());
+			res.setWordlist(res.getTrueWordlist());
+		}
+	}
+	
 	/**
 	 * Returns an iterator to iterate over all the quiz results in this QuizHistory object.
 	 * @return

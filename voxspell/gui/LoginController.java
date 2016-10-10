@@ -85,6 +85,7 @@ public class LoginController {
 							ObjectInputStream ois = new ObjectInputStream(fin);
 							try {
 								usr = (User) ois.readObject();
+								usr.getHistory().refresh();
 								ois.close();
 							} catch (ClassNotFoundException e) {
 								// TODO Auto-generated catch block

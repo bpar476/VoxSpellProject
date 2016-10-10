@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="469.0" prefWidth="670.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="469.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voxspell.gui.DetailedStatisticsScreenController">
    <children>
       <BorderPane layoutX="-221.0" layoutY="-165.0" prefHeight="469.0" prefWidth="670.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -25,13 +24,13 @@
          <center>
             <Pane BorderPane.alignment="CENTER">
                <children>
-                  <TableView prefHeight="397.0" prefWidth="670.0">
+                  <TableView fx:id="quizTable" prefHeight="397.0" prefWidth="670.0">
                     <columns>
-                      <TableColumn prefWidth="155.0" text="Date" />
-                      <TableColumn prefWidth="127.0" text="Quiz Type" />
-                        <TableColumn prefWidth="142.0" text="Word list" />
-                        <TableColumn prefWidth="121.0" text="Score" />
-                        <TableColumn prefWidth="123.0" text="Best Streak" />
+                      <TableColumn fx:id="dateCol" prefWidth="254.0" resizable="false" text="Date" />
+                      <TableColumn fx:id="typeCol" minWidth="0.0" prefWidth="141.0" text="Quiz Type" />
+                        <TableColumn fx:id="listCol" prefWidth="116.0" text="Word list" />
+                        <TableColumn fx:id="scoreCol" prefWidth="63.0" text="Score" />
+                        <TableColumn fx:id="streakCol" prefWidth="94.0" text="Best Streak" />
                     </columns>
                      <opaqueInsets>
                         <Insets />
@@ -43,7 +42,7 @@
          <bottom>
             <HBox prefHeight="65.0" prefWidth="670.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" text="Back">
+                  <Button fx:id="back" mnemonicParsing="false" onAction="#backPressed" text="Back">
                      <HBox.margin>
                         <Insets left="20.0" top="20.0" />
                      </HBox.margin>
@@ -51,7 +50,7 @@
                         <Font name="DejaVu Sans Mono Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" text="More Details">
+                  <Button fx:id="moreDetails" mnemonicParsing="false" onAction="#moreDetailsPressed" text="More Details">
                      <HBox.margin>
                         <Insets left="470.0" top="20.0" />
                      </HBox.margin>

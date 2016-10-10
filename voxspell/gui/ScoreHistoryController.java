@@ -41,15 +41,12 @@ public class ScoreHistoryController {
 	
 	@FXML
 	public void handleMainMenuPressed(ActionEvent ae){
-		Stage primaryStage = VoxSpell.getMainStage();
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		changeScene("MainMenu.fxml");
+	}
+	
+	@FXML
+	public void handleFullDetailPressed(){
+		changeScene("DetailedStatsScreen.fxml");
 	}
 	
 	@FXML
@@ -78,5 +75,17 @@ public class ScoreHistoryController {
 		strongestListLabel.setText("Best wordlist: " + usr.getBestList());
 		highestLevelLabel.setText("Highest level: " + usr.getHighestLevel());
 		
+	}
+	
+	private void changeScene(String fxmlFile){
+		Stage primaryStage = VoxSpell.getMainStage();
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

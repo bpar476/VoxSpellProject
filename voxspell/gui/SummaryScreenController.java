@@ -24,8 +24,8 @@ import javafx.util.Duration;
 import voxspell.Config;
 import voxspell.VoxSpell;
 import voxspell.quiz.QuizResults;
-import voxspell.quiz.QuizResults.Result;
 import voxspell.quiz.QuizRules;
+import voxspell.quiz.QuizResults.Result;
 
 public class SummaryScreenController {
 
@@ -63,6 +63,7 @@ public class SummaryScreenController {
 	@FXML
 	public void handleNextLevel(ActionEvent ae){
 		QuizRules.setQuizType("New Quiz");
+		//TODO make sure the user does not exceed max level for that word list.
 		QuizRules.setStartLevel(QuizRules.getInstance().getLevel() + 1);
 		QuizRules.setWordListLocation(Config.getWordListLocation());
 		changeScene("SpellScreen.fxml");
@@ -127,7 +128,7 @@ public class SummaryScreenController {
 	 * @param results
 	 */
 	public void setResults(QuizResults results){		
-		if(results.getScore() > results.answeredSize() * 0.9 & results.getStreak() == results.answeredSize()){
+		if(results.getScore() > results.answeredSize() * 0.9 & results.getBestStreak() == results.answeredSize()){
 			if(Config.isColourBlindMode()){
 				excellent.setTextFill(Color.BLUE);
 			}
@@ -144,7 +145,7 @@ public class SummaryScreenController {
 		}
 
 		scoreLabel.setText("Score: " + results.getScore());
-		streakLabel.setText("Best Streak: " + results.getStreak());
+		streakLabel.setText("Best Streak: " + results.getBestStreak());
 		long timeInSeconds = results.getTime()/1000;
 		long mins = timeInSeconds / 60;
 		timeInSeconds = timeInSeconds % 60;

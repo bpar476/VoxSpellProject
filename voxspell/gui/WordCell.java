@@ -3,8 +3,8 @@ package voxspell.gui;
 import javafx.scene.control.ListCell;
 import javafx.scene.paint.Color;
 import voxspell.Config;
-import voxspell.quiz.QuizResults.Result;
 import voxspell.quiz.WordScore;
+import voxspell.quiz.QuizResults.Result;
 
 /**
  * Custom ListCell element used to represent Result items in the ListView used in the SummaryScreenController class.

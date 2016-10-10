@@ -1,18 +1,39 @@
 package voxspell.gui;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.Iterator;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import voxspell.Config;
 import voxspell.VoxSpell;
+import voxspell.quiz.QuizResults;
 
 public class DetailedStatisticsScreenController {
 	
+	@FXML
+	private TableView<QuizResults> quizTable;
+	@FXML
+	private TableColumn dateCol;
+	@FXML
+	private TableColumn typeCol;
+	@FXML
+	private TableColumn listCol;
+	@FXML
+	private TableColumn scoreCol;
+	@FXML
+	private TableColumn streakCol;
 	@FXML
 	private Button back;
 	@FXML
@@ -57,5 +78,26 @@ public class DetailedStatisticsScreenController {
 			e.printStackTrace();
 		}
 	}
-
+	
+	@FXML
+	public void initialize(){
+		fillTable();
+	}
+	
+	private void fillTable(){
+		final ObservableList<QuizResults> data = FXCollections.observableArrayList();
+		dateCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Date>("dateCompleted"));
+		typeCol.setCellValueFactory(new PropertyValueFactory<QuizResults,String>("quizType"));
+		listCol.setCellValueFactory(new PropertyValueFactory<QuizResults,String>("wordlist"));
+		scoreCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Number>("score"));
+		streakCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Number>("bestStreak"));
+		
+		Iterator<QuizResults> resultIterator = Config.getUser().getHistory().iterator();
+		
+		while(resultIterator.hasNext()){
+			data.add(resultIterator.next());
+		}
+		
+		quizTable.setItems(data);
+	}
 }

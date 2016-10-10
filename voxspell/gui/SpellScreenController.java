@@ -137,6 +137,9 @@ public class SpellScreenController {
 			results.setScore(score);
 			results.setLevel(quiz.getLevel());
 			results.setNumWords(quiz.size());
+			results.setQuizType(quiz.getType());
+			String[] listLocation = Config.getWordListLocation().split("/");
+			results.setWordlist(listLocation[listLocation.length-1]);
 			
 			Config.getUser().getHistory().add(results);
 						
@@ -229,11 +232,13 @@ public class SpellScreenController {
 			results.setScore(score);
 			results.setLevel(quiz.getLevel());
 			results.setNumWords(quiz.size());
+			results.setQuizType(quiz.getType());
+			String[] listLocation = Config.getWordListLocation().split("/");
+			results.setWordlist(listLocation[listLocation.length-1]);
 			
 			User usr = Config.getUser();
 			if(result > usr.getBestScore()){
 				usr.setBestScore(result);
-				String[] listLocation = Config.getWordListLocation().split("/");
 				usr.setBestWordList(listLocation[listLocation.length-1]);
 			}
 			if(highStreak > usr.getBestStreak()){

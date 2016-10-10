@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class QuizResults implements Serializable{
 
 	private static final long serialVersionUID = 3992581471467692760L;
@@ -15,6 +17,10 @@ public class QuizResults implements Serializable{
 	private int numWordsInQuiz;
 	private int level;
 	private Date dateCompleted;
+	private transient SimpleStringProperty quizTypeProperty;
+	private transient SimpleStringProperty wordlistProperty;
+	private String quizType;
+	private String wordlist;
 	
 	public QuizResults(){
 		results = new ArrayList<>();
@@ -28,6 +34,23 @@ public class QuizResults implements Serializable{
 	 */
 	public void add(String word, WordScore score, int attempts){
 		results.add(new Result(word, score, attempts));
+	}
+	
+	public void setQuizType(String type){
+		quizType = type;
+		quizTypeProperty = new SimpleStringProperty(quizType);
+	}
+	
+	public SimpleStringProperty getQuizTypeProperty(){
+		return quizTypeProperty;
+	}
+	
+	public String getQuizType(){
+		return quizTypeProperty.get();
+	}
+	
+	public String getTrueQuizType(){
+		return quizType;
 	}
 	
 	public int answeredSize(){
@@ -54,7 +77,7 @@ public class QuizResults implements Serializable{
 		return score;
 	}
 	
-	public int getStreak(){
+	public int getBestStreak(){
 		return bestStreak;
 	}
 	
@@ -78,10 +101,27 @@ public class QuizResults implements Serializable{
 		return level;
 	}
 	
-	public Date getDate(){
+	public Date getDateCompleted(){
 		return dateCompleted;
 	}
 	
+	public String getWordlist() {
+		return wordlistProperty.get();
+	}
+	
+	public String getTrueWordlist(){
+		return wordlist;
+	}
+
+	public SimpleStringProperty getWordlistProperty(){
+		return wordlistProperty;
+	}
+	
+	public void setWordlist(String wordlist) {
+		this.wordlist = wordlist;
+		wordlistProperty = new SimpleStringProperty(wordlist);
+	}
+
 	/**
 	 * Nested class representing the a user's result for spelling a given word.
 	 * @author bpar
