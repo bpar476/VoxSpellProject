@@ -32,6 +32,13 @@
                            </BorderPane.margin>
                         </ListView>
                      </center>
+                     <top>
+                        <Label text="Click a word to see meaning" BorderPane.alignment="TOP_LEFT">
+                           <BorderPane.margin>
+                              <Insets left="10.0" />
+                           </BorderPane.margin>
+                        </Label>
+                     </top>
                   </BorderPane>
                   <VBox prefHeight="405.0" prefWidth="231.0">
                      <children>

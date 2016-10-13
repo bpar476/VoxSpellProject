@@ -299,6 +299,7 @@ public class SettingsController {
 		ObservableList<String> voices = FXCollections.observableArrayList();
 		voices.add("New Zealand");
 		voices.add("American");
+		//TODO add english voice.
 		voicesBox.setItems(voices);
 		voicesBox.setPromptText("Select a voice for reading words");
 		//Set word lists combo box;

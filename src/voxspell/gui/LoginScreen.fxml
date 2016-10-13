@@ -6,30 +6,29 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="310.0" prefWidth="423.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="voxspell.gui.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voxspell.gui.LoginController">
    <children>
-      <Pane prefHeight="310.0" prefWidth="423.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutX="1.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="310.0" prefWidth="423.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="58.0" layoutY="26.0" prefHeight="16.0" prefWidth="306.0" text="Welcome to VOXSPELL">
+            <Label layoutX="101.0" layoutY="26.0" prefHeight="16.0" prefWidth="306.0" text="Welcome to VOXSPELL">
                <font>
                   <Font name="DejaVu Sans Mono Bold" size="26.0" />
                </font>
             </Label>
-            <Label layoutX="65.0" layoutY="95.0" prefHeight="31.0" prefWidth="104.0" text="Username: ">
+            <Label layoutX="90.0" layoutY="95.0" prefHeight="31.0" prefWidth="104.0" text="Username: ">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="65.0" layoutY="145.0" prefHeight="15.0" prefWidth="111.0" text="Password:">
+            <Label layoutX="90.0" layoutY="145.0" prefHeight="15.0" prefWidth="111.0" text="Password:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameField" layoutX="193.0" layoutY="97.0" />
-            <PasswordField fx:id="passwordField" layoutX="193.0" layoutY="145.0" onKeyPressed="#handleEnterPressed"/>
-            <Button fx:id="login" layoutX="256.0" layoutY="245.0" mnemonicParsing="false" onAction="#handleLoginPressed" prefWidth="107.0" text="Login" />
-            <Button fx:id="createProfile" layoutX="65.0" layoutY="245.0" mnemonicParsing="false" onAction="#createProfilePressed" text="Create profile" />
+            <TextField fx:id="usernameField" layoutX="240.0" layoutY="97.0" />
+            <PasswordField fx:id="passwordField" layoutX="240.0" layoutY="145.0" onKeyPressed="#handleEnterPressed" />
+            <Button fx:id="login" layoutX="303.0" layoutY="245.0" mnemonicParsing="false" onAction="#handleLoginPressed" prefWidth="107.0" text="Login" />
+            <Button fx:id="createProfile" layoutX="90.0" layoutY="245.0" mnemonicParsing="false" onAction="#createProfilePressed" text="Create profile" />
             <Label fx:id="wrongPassword" layoutX="121.0" layoutY="65.0" text="Error: Incorrect password." textFill="#e80808" visible="false" />
             <Label fx:id="userNotRecognised" layoutX="117.0" layoutY="58.0" text="Error: Username does not exist" textFill="#fc0d0d" visible="false" />
          </children>

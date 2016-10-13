@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="266.0" prefWidth="514.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voxspell.gui.SpellScreenController">
+<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voxspell.gui.SpellScreenController">
    <children>
       <BorderPane layoutX="-171.0" layoutY="-111.0" prefHeight="345.0" prefWidth="514.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -46,11 +46,24 @@
                         <Insets left="10.0" top="10.0" />
                      </VBox.margin>
                   </Label>
+                  <Pane prefHeight="34.0" prefWidth="323.0">
+                     <VBox.margin>
+                        <Insets top="55.0" />
+                     </VBox.margin>
+                     <children>
+                        <ComboBox fx:id="voiceBox" layoutX="161.0" layoutY="5.0" onAction="#handlevoiceChanged" prefHeight="25.0" prefWidth="117.0" />
+                        <Label layoutX="52.0" layoutY="4.0" prefHeight="24.0" prefWidth="125.0" text="Change Voice">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
                </children>
             </VBox>
          </center>
          <right>
-            <VBox prefHeight="345.0" prefWidth="124.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="300.0" prefWidth="144.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="startSubmit" mnemonicParsing="false" onAction="#handleStartSubmitButtonPressed" text="Start Quiz">
                      <font>
@@ -96,16 +109,16 @@
             </VBox>
          </right>
          <left>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="300.0" prefWidth="133.0" BorderPane.alignment="CENTER">
                <children>
                   <Label fx:id="quizTypeLabel" text="QUIZ" textOverrun="CLIP">
                      <VBox.margin>
-                        <Insets left="5.0" top="5.0" />
+                        <Insets left="10.0" top="5.0" />
                      </VBox.margin>
                   </Label>
                   <Label fx:id="spellListLabel" text="WORDLIST">
                      <VBox.margin>
-                        <Insets left="5.0" top="5.0" />
+                        <Insets left="10.0" top="5.0" />
                      </VBox.margin>
                   </Label>
                   <StackPane prefHeight="15.0" prefWidth="95.0">
@@ -127,7 +140,7 @@
                   </StackPane>
                   <Button fx:id="mainMenu" mnemonicParsing="false" onAction="#handleMainMenuPressed" text="Main Menu">
                      <VBox.margin>
-                        <Insets left="5.0" top="95.0" />
+                        <Insets left="10.0" top="95.0" />
                      </VBox.margin>
                      <font>
                         <Font size="12.0" />

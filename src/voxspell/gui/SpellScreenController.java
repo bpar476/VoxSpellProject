@@ -1,13 +1,18 @@
 package voxspell.gui;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -25,6 +30,7 @@ import voxspell.user.profile.User;
 
 public class SpellScreenController {
 
+	
 	//functional fields
 	private boolean inQuiz;
 	private NewQuiz quiz;
@@ -65,6 +71,8 @@ public class SpellScreenController {
 	private Label previousEnterLabel;
 	@FXML
 	private Button endQuiz;
+	@FXML
+	private ComboBox voiceBox;
 
 	/**
 	 * Handles when the start quiz or submit button is pressed. Takes the entered word and uses the quiz to check its correctness.
@@ -268,6 +276,17 @@ public class SpellScreenController {
 			quiz.speakWord();
 		}
 	}
+	
+	@FXML
+	public void handlevoiceChanged(ActionEvent ae){
+		String voice = (String)voiceBox.getSelectionModel().getSelectedItem();
+		if(voice.equals("New Zealand")){
+			Festival.getInstance().kiwiVoice();
+		}else if(voice.equals("American")){
+			Festival.getInstance().americanVoice();
+		}
+		Festival.getInstance().restart();
+	}
 
 	
 	/**
@@ -289,6 +308,12 @@ public class SpellScreenController {
 		if(Config.isColourBlindMode()){
 			correct.setTextFill(Color.BLUE);
 		}
+		ObservableList<String> voices = FXCollections.observableArrayList();
+		voices.add("New Zealand");
+		voices.add("American");
+		//TODO add english voice.
+		voiceBox.setItems(voices);
+		voiceBox.setPromptText(Config.getVoice());
 	}
 	
 }
