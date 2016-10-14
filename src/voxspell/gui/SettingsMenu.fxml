@@ -33,7 +33,7 @@
                         <Font name="DejaVu Sans Mono Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="resetHistory" layoutX="61.0" layoutY="294.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" text="Reset History">
+                  <Button fx:id="resetHistory" layoutX="61.0" layoutY="294.0" mnemonicParsing="false" onAction="#resetHistoryPressed" prefHeight="50.0" prefWidth="240.0" text="Reset History">
                      <font>
                         <Font name="DejaVu Sans Mono Bold" size="20.0" />
                      </font>
@@ -61,6 +61,11 @@
                         <Font name="DejaVu Sans Mono Bold" size="13.0" />
                      </font>
                   </Label>
+                  <RadioButton fx:id="musicSelector" layoutX="335.0" layoutY="174.0" mnemonicParsing="false" onAction="#musicSelectorToggled" text="Music Disabled">
+                     <font>
+                        <Font name="DejaVu Sans Mono Bold" size="20.0" />
+                     </font>
+                  </RadioButton>
                </children>
             </Pane>
          </center>

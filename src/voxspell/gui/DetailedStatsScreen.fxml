@@ -26,11 +26,12 @@
                <children>
                   <TableView fx:id="quizTable" prefHeight="397.0" prefWidth="670.0">
                     <columns>
-                      <TableColumn fx:id="dateCol" prefWidth="254.0" resizable="false" text="Date" />
-                      <TableColumn fx:id="typeCol" minWidth="0.0" prefWidth="141.0" text="Quiz Type" />
-                        <TableColumn fx:id="listCol" prefWidth="116.0" text="Word list" />
-                        <TableColumn fx:id="scoreCol" prefWidth="63.0" text="Score" />
-                        <TableColumn fx:id="streakCol" prefWidth="94.0" text="Best Streak" />
+                      <TableColumn fx:id="dateCol" prefWidth="219.0" resizable="false" text="Date" />
+                      <TableColumn fx:id="typeCol" minWidth="0.0" text="Quiz Type" />
+                        <TableColumn fx:id="listCol" prefWidth="160.0" text="Word list" />
+                        <TableColumn fx:id="levelCol" editable="false" prefWidth="53.0" text="Level" />
+                        <TableColumn fx:id="scoreCol" prefWidth="57.0" text="Score" />
+                        <TableColumn fx:id="streakCol" prefWidth="99.0" text="Best Streak" />
                     </columns>
                      <opaqueInsets>
                         <Insets />

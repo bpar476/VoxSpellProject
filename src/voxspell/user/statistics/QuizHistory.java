@@ -36,6 +36,10 @@ public class QuizHistory implements Serializable{
 		}
 	}
 	
+	public void reset(){
+		history = new ArrayList<>();
+	}
+	
 	/**
 	 * Returns an iterator to iterate over all the quiz results in this QuizHistory object.
 	 * @return

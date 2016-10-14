@@ -54,8 +54,10 @@ public class SettingsController {
 	private ComboBox<String> startDifficultyBox;
 	@FXML
 	private Label confirmedNotification;
-
+	@FXML
+	private RadioButton musicSelector;
 	private boolean colourBlind;
+	private boolean musicDisabled;
 
 	/**
 	 * Handles when the user presses the "back to main menu" button.
@@ -171,6 +173,27 @@ public class SettingsController {
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
+	public void musicSelectorToggled(){
+		confirmedNotification.setVisible(false);
+		musicDisabled = !musicDisabled;
+	}
+	
+	/**
+	 * Prompts the user to make sure they want to do this, then delete's all of their
+	 * quiz history data.
+	 * @param ae
+	 */
+	@FXML
+	public void resetHistoryPressed(ActionEvent ae){
+		Alert al = new Alert(Alert.AlertType.CONFIRMATION);
+		al.setContentText("Are you sure you want to delete all\nyour spelling history");
+		Optional<ButtonType> butt = al.showAndWait();
+		if(butt.get() == ButtonType.OK){
+			Config.getUser().reset();
+		}
+	}
 
 	@FXML
 	public void colourBlindToggled(ActionEvent ae){
@@ -243,6 +266,7 @@ public class SettingsController {
 			wr.append("wordlist=" + wordList + "\n");
 			wr.append("colourblind=" + colourBlind + "\n");
 			wr.append("voice=" + voice + "\n");
+			wr.append("music_disabled=" + musicDisabled + "\n");
 			wr.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -352,6 +376,13 @@ public class SettingsController {
 						colourBlind = true;
 					}else{
 						colourBlind = false;						
+					}
+				}else if(property[0].equals("music_disabled")){
+					if(property[1].equals("true")){
+						musicSelector.fire();
+						musicDisabled = true;
+					}else{
+						musicDisabled = false;
 					}
 				}
 			}

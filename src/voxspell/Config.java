@@ -57,6 +57,30 @@ public class Config {
 		return -1;
 	}
 	
+	public static boolean getMuted(){
+		BufferedReader rdr = null;
+		try {
+			rdr = new BufferedReader(new FileReader(cfg));
+		} catch (FileNotFoundException e) {
+			System.err.println("Error: voxspell.prop file not found. Unable to configure voxspell");
+			e.printStackTrace();
+		}
+		String line;
+		try {
+			while((line = rdr.readLine()) != null){
+				String[] property = line.split("=");
+				if(property[0].equals("music_disabled")){
+					return Boolean.parseBoolean(property[1]);
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+	
 	/**
 	 * Reads the config file to find the name of the wordlist file and returns the relative path.
 	 * @return

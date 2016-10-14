@@ -65,6 +65,17 @@ public class User implements Serializable{
 		return this.history;
 	}
 	
+	public void reset(){
+		history.reset();
+		bestScore = 0;
+		bestStreak = 0;
+		bestWordList = "";
+		highestLevel = 0;
+	}
+	
+	/**
+	 * Stores the state of the user object in a serialized object file.
+	 */
 	public void write(){
 		File writeLocation = new File(FILE_LOCATION + toString() + ".ser");
 		if(!writeLocation.exists()){

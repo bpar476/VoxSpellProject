@@ -1,5 +1,9 @@
 package voxspell.gui;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -10,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -18,14 +23,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import voxspell.Config;
 import voxspell.VoxSpell;
 import voxspell.quiz.QuizResults;
-import voxspell.quiz.QuizRules;
 import voxspell.quiz.QuizResults.Result;
+import voxspell.quiz.QuizRules;
 
 public class SummaryScreenController {
 
@@ -34,6 +40,8 @@ public class SummaryScreenController {
 	//FXML fields
 	@FXML
 	private Button playVideo;
+	@FXML
+	private Button nextLevelButton;
 	@FXML
 	private Label levelLabel;
 	@FXML
@@ -63,7 +71,6 @@ public class SummaryScreenController {
 	@FXML
 	public void handleNextLevel(ActionEvent ae){
 		QuizRules.setQuizType("New Quiz");
-		//TODO make sure the user does not exceed max level for that word list.
 		QuizRules.setStartLevel(QuizRules.getInstance().getLevel() + 1);
 		QuizRules.setWordListLocation(Config.getWordListLocation());
 		changeScene("SpellScreen.fxml");
@@ -101,6 +108,7 @@ public class SummaryScreenController {
 			stage.setScene(scene);
 			stage.hide();
 			rewardSongPlayer.pause();
+			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.showAndWait();
 			rewardSongPlayer.play();
 		} catch (IOException e) {
@@ -126,8 +134,9 @@ public class SummaryScreenController {
 	 * Method used to give the summary screen results from a quiz. Looks at the results
 	 * and processes them to create the summary screen view.
 	 * @param results
+	 * @throws FileNotFoundException 
 	 */
-	public void setResults(QuizResults results){		
+	public void setResults(QuizResults results) throws FileNotFoundException{		
 		if(results.getScore() > results.answeredSize() * 0.9 & results.getBestStreak() == results.answeredSize()){
 			if(Config.isColourBlindMode()){
 				excellent.setTextFill(Color.BLUE);
@@ -157,6 +166,7 @@ public class SummaryScreenController {
 		levelLabel.setText("Level: " + results.getLevel());
 		if(results.getScore() > results.answeredSize() * 0.8){
 			playVideo.setVisible(true);
+			nextLevelButton.setVisible(true);
 		}
 		history.setCellFactory(new Callback<ListView<Result>, ListCell<Result>>(){
 
@@ -174,6 +184,24 @@ public class SummaryScreenController {
 		}
 		history.setItems(resultsList);
 
+		//Make sure user can't go to a level that isn't supported by the wordlist.
+		File wordListFile = new File(Config.getWordListLocation());
+		BufferedReader rdr = new BufferedReader(new FileReader(wordListFile));
+		String line = "";
+		int maxLevel = 0;
+		try {
+			while((line = rdr.readLine()) != null){
+				if(line.charAt(0) == '%'){
+					maxLevel++;
+				}
+			}
+		} catch (IOException e) {
+			System.err.println("Error reading wordlist file");
+			e.printStackTrace();
+		}
+		if(QuizRules.getInstance().getLevel() == maxLevel){
+			nextLevelButton.setVisible(false);
+		}
 	}
 	
 	/**
@@ -207,6 +235,7 @@ public class SummaryScreenController {
 				rewardSongPlayer.seek(Duration.ZERO);
 			}
 		});;
+		if(!Config.getMuted())
 		rewardSongPlayer.play();
 	}
 

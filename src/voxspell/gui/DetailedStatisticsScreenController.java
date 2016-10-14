@@ -35,6 +35,8 @@ public class DetailedStatisticsScreenController {
 	@FXML
 	private TableColumn streakCol;
 	@FXML
+	private TableColumn levelCol;
+	@FXML
 	private Button back;
 	@FXML
 	private Button moreDetails;
@@ -91,6 +93,7 @@ public class DetailedStatisticsScreenController {
 		listCol.setCellValueFactory(cellData -> cellData.getValue().getWordlistProperty());
 		scoreCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Number>("score"));
 		streakCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Number>("bestStreak"));
+		levelCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Number>("level"));
 		
 		Iterator<QuizResults> resultIterator = Config.getUser().getHistory().iterator();
 		
