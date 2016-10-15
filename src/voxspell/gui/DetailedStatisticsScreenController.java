@@ -20,6 +20,13 @@ import voxspell.Config;
 import voxspell.VoxSpell;
 import voxspell.quiz.QuizResults;
 
+/**
+ * Controller for the detailed statistics screen. This screen shows a table with the previous twenty
+ * quizzes of any game mode that the current user has completed. Each table element may be clicked
+ * to take the user to a summary of that quiz, see the words they spelled right, the words they spelled wrong etc.
+ * @author bpar
+ *
+ */
 public class DetailedStatisticsScreenController {
 	
 	@FXML
@@ -86,6 +93,9 @@ public class DetailedStatisticsScreenController {
 		fillTable();
 	}
 	
+	/*
+	 * Sets up data to fill the table by specifying what fields the cell value factory should use.
+	 */
 	private void fillTable(){
 		final ObservableList<QuizResults> data = FXCollections.observableArrayList();
 		dateCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Date>("dateCompleted"));
@@ -96,7 +106,7 @@ public class DetailedStatisticsScreenController {
 		levelCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Number>("level"));
 		
 		Iterator<QuizResults> resultIterator = Config.getUser().getHistory().iterator();
-		
+		//Adds actual data to the table dataset.
 		while(resultIterator.hasNext()){
 			data.add(resultIterator.next());
 		}

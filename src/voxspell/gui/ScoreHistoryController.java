@@ -22,6 +22,13 @@ import voxspell.quiz.QuizResults;
 import voxspell.user.profile.User;
 import voxspell.user.statistics.QuizHistory;
 
+/**
+ * Controller for the "Score history" screen. Shows a line graph with the last 10 Quizzes the current
+ * user has completed. Shows a summary of the user's greatest achievements. Allows user to move
+ * to a more detailed screen where the user can look at each individual of the last 20 quizzes they have completed.
+ * @author bpar
+ *
+ */
 public class ScoreHistoryController {
 
 	@FXML
@@ -49,6 +56,10 @@ public class ScoreHistoryController {
 		changeScene("DetailedStatsScreen.fxml");
 	}
 	
+	/**
+	 * Does some setup before the scene loads. Fills the chart and puts the detail in the user's
+	 * Personal bests summary.
+	 */
 	@FXML
 	public void initialize(){
 		//Set up chart
@@ -58,6 +69,7 @@ public class ScoreHistoryController {
 		xAxis.setLabel("Date");
 		yAxis.setLabel("Score");
 		
+		//Fills chart with
 		XYChart.Series series = new XYChart.Series();
 		QuizHistory history = Config.getUser().getHistory();
 		Iterator<QuizResults> resultsIterator = history.iterator();
@@ -77,6 +89,7 @@ public class ScoreHistoryController {
 		
 	}
 	
+	//Helper method to change the scene.
 	private void changeScene(String fxmlFile){
 		Stage primaryStage = VoxSpell.getMainStage();
 		try {

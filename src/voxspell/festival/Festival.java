@@ -45,7 +45,7 @@ public class Festival {
 		private static Queue<String> command;
 		private static Process proc;
 
-		
+		//Starts a festival process that can be written to at any stage.
 		protected FestivalService(){
 			command = new LinkedList<>();
 			ProcessBuilder festival = new ProcessBuilder("/bin/bash", "-c", "festival");
@@ -58,7 +58,8 @@ public class Festival {
 				e.printStackTrace();
 			}
 		}
-
+		
+		//Private helper method to make code easier to understand.
 		protected void setCommand(String comm){
 			command.add(comm);
 		}

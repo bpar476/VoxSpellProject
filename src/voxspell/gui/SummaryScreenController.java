@@ -225,6 +225,10 @@ public class SummaryScreenController {
 	
 	@FXML
 	public void initialize(){
+		/*Music: With You and Ice Cream Flying, Milky-chu. 
+		Taken from:
+		http://freemusicarchive.org/music/milky-chu/Carnival_For_Edelweisss_Ensemble/With_You_And_Icecream_Flying
+		*/
 		rewardSong = new Media("file:///" + REWARD_SONG_LOCATION);
 		rewardSongPlayer = new MediaPlayer(rewardSong);
 		rewardSongPlayer.setOnEndOfMedia(new Runnable() {

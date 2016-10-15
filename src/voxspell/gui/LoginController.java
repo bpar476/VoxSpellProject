@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 
 import javafx.event.ActionEvent;
@@ -25,6 +24,12 @@ import voxspell.Config;
 import voxspell.VoxSpell;
 import voxspell.user.profile.User;
 
+/**
+ * Controller class for login screen interface. The user is required to enter their username and password, or 
+ * has the option of creating an account to login with in future. Has shortcut keys to login with just the enter key.
+ * @author bpar
+ *
+ */
 public class LoginController {
 
 	private static final String DATA_LOCATION = System.getProperty("user.dir") + "/.Resources/data/";
@@ -52,7 +57,6 @@ public class LoginController {
 	 */
 	@FXML
 	public void handleLoginPressed(ActionEvent ae){
-		//TODO make login by enter possible
 		wrongPassword.setVisible(false);
 		userNotRecognised.setVisible(false);
 		BufferedReader rdr = null;
@@ -61,6 +65,7 @@ public class LoginController {
 		} catch (FileNotFoundException e) {
 			//Create user data file
 			try {
+				//If the file is not found for some reason, create the file and try again.
 				userInfo.createNewFile();
 				handleLoginPressed(ae);
 			} catch (IOException e1) {
@@ -68,7 +73,8 @@ public class LoginController {
 				e1.printStackTrace();
 			}
 		}
-
+		
+		//Reads throught the user info file and checks supplied credentials against database.
 		String line;
 		try {
 			rdr.readLine();
@@ -126,7 +132,11 @@ public class LoginController {
 	public void createProfilePressed(ActionEvent ae){
 		changeScene("CreateProfile.fxml");
 	}
-
+	
+	/**
+	 * Lets the user login when they press enter.
+	 * @param ke
+	 */
 	@FXML
 	public void handleEnterPressed(KeyEvent ke){
 		if(ke.getCode() == KeyCode.ENTER){

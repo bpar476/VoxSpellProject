@@ -33,6 +33,13 @@ import voxspell.Config;
 import voxspell.VoxSpell;
 import voxspell.festival.Festival;
 
+/**
+ * Controller for settings screen. Handles user changing application settings and write them
+ * to the voxspell properties file. User can change settings, confirm them and continue with the changes
+ * saved to the voxspell properties file.
+ * @author bpar
+ *
+ */
 public class SettingsController {
 
 	private static final String WORDLIST_EXTENSION = "/.Resources/wordlists/";
@@ -66,6 +73,7 @@ public class SettingsController {
 	@FXML
 	public void mainMenuButtonPressed(ActionEvent ae){
 		BufferedReader rdr = null;
+		//Creates an alert that will be shown if the user has made changes and not saved them.
 		Alert confirmDeparture = new Alert(AlertType.CONFIRMATION);
 		confirmDeparture.setContentText("If you leave without clicking confirm"
 				+ " you will lose the changes you have made.\n\nDo you still want to continue?");
@@ -73,11 +81,12 @@ public class SettingsController {
 		confirmDeparture.setHeaderText("Leave unsaved changes?");
 		confirmDeparture.setTitle("Leave settings");
 		try{
+			//Reads through properties file and checks to see if there are discrepancies between file and
+			//current state of settings screen. If there are, show the alert to allow user to save changes.
 			rdr = new BufferedReader(new FileReader(System.getProperty("user.dir") + PROPERTIES_EXTENSION));
 			String line;
 			while((line = rdr.readLine()) != null){
 				String[] splitProperty = line.split("=");
-				//TODO check if changes have been made so as to make confirmation before leaving.
 				if(splitProperty[0].equals("voice")){
 					if(!splitProperty[1].equals(voicesBox.getSelectionModel().getSelectedItem())){
 						Optional<ButtonType> result = confirmDeparture.showAndWait();
@@ -158,7 +167,6 @@ public class SettingsController {
 			try {
 				rdr.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -174,8 +182,11 @@ public class SettingsController {
 		}
 	}
 	
+	/**
+	 * event handler for when the user toggles the music disable button.
+	 */
 	@FXML
-	public void musicSelectorToggled(){
+	public void musicSelectorToggled(ActionEvent ae){
 		confirmedNotification.setVisible(false);
 		musicDisabled = !musicDisabled;
 	}
@@ -194,18 +205,31 @@ public class SettingsController {
 			Config.getUser().reset();
 		}
 	}
-
+	
+	/**
+	 * Event handler for when the user toggles colourblind more button. 
+	 * @param ae
+	 */
 	@FXML
 	public void colourBlindToggled(ActionEvent ae){
 		confirmedNotification.setVisible(false);
 		colourBlind = !colourBlind;
 	}
-
+	
+	/**
+	 * Disables changes saved notification when the level is changed to reflect
+	 * current state of settings.
+	 * @param ae
+	 */
 	@FXML
 	public void levelChanged(ActionEvent ae){
 		confirmedNotification.setVisible(false);
 	}
-
+	/**
+	 * Disables changes saved notification when the festival voice is changed \
+	 * to reflect current state of settings.
+	 * @param ae
+	 */
 	@FXML
 	public void voiceChanged(ActionEvent ae){
 		confirmedNotification.setVisible(false);
@@ -249,7 +273,12 @@ public class SettingsController {
 		}
 	}
 
-
+	
+	/**
+	 * Writes the current state of the settings screen to the voxspell properties file
+	 * and shows a notification to show that it was successful.
+	 * @param ae
+	 */
 	@FXML
 	public void confirmPressed(ActionEvent ae){
 		//Update config file
@@ -269,7 +298,6 @@ public class SettingsController {
 			wr.append("music_disabled=" + musicDisabled + "\n");
 			wr.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -282,7 +310,13 @@ public class SettingsController {
 		Festival.getInstance().restart();
 		confirmedNotification.setVisible(true);
 	}
-
+	
+	/**
+	 * Presents a file chooser to the user so that they can import their own wordlist files.
+	 * The files must follow the format specified in the NZCER-spelling-list.txt file. That is,
+	 * it has a level header for each level of the format %Level X.
+	 * @param ae
+	 */
 	@FXML
 	public void addWordListPressed(ActionEvent ae){
 		FileChooser chooser = new FileChooser();
@@ -302,7 +336,6 @@ public class SettingsController {
 				wr.flush();
 				wr.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			ObservableList<File> wordLists = FXCollections.observableArrayList();
@@ -387,7 +420,6 @@ public class SettingsController {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			try {

@@ -19,6 +19,12 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import voxspell.VoxSpell;
 
+/**
+ * Controller class for the create profile screen. This screen is entered when a user has not
+ * created their own unique login. Requires a user to enter a username and password and confirm that password.
+ * @author bpar
+ *
+ */
 public class CreateProfileController {
 
 	private static File userInfoFile = new File(System.getProperty("user.dir") + "/.Resources/data/user_info.dat");
@@ -61,12 +67,14 @@ public class CreateProfileController {
 			BufferedReader rdr = new BufferedReader(new FileReader(userInfoFile));
 			String line;
 			try {
+				//Check to make sure that username is not already taken.
 				while((line = rdr.readLine()) != null){
 					if(username.equals(line.split(":")[0])){
 						usernameTaken.setVisible(true);
 						return;
 					}
 				}
+				rdr.close();
 			} catch (IOException e) {
 				System.err.println("Fatal error: unable to access user info file");
 			}
@@ -79,6 +87,7 @@ public class CreateProfileController {
 			}
 		}
 		
+		//Make sure something is actually entered in each field.
 		if(username.equals("")){
 			noUsername.setVisible(true);
 		}else if(password.equals("")){
@@ -86,6 +95,7 @@ public class CreateProfileController {
 		}else if(!password.equals(confirmedPassword)){
 			passwordMismatch.setVisible(true);
 		}else{
+			//If all fields are filled correctly, write information to file holding user data.
 			PrintWriter wr = null;
 			try {
 				wr = new PrintWriter(new FileWriter(userInfoFile));
@@ -93,6 +103,7 @@ public class CreateProfileController {
 				System.err.println("Fatal Error: unable to write to user info file.");
 				e.printStackTrace();
 			}
+			//Store password hashcode for security.
 			wr.append("\n" + username + ":" + password.hashCode());
 			wr.flush();
 			wr.close();

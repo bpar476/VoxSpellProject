@@ -1,8 +1,6 @@
 package voxspell.gui;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +26,13 @@ import voxspell.quiz.QuizResults;
 import voxspell.quiz.QuizRules;
 import voxspell.user.profile.User;
 
+/**
+ * Controller for Spelling interface. Works with QuizRules and Quiz classes to manage the quiz experience
+ * Also has GUI options for changing the voice and returning to the main menu. Handles key events for pressing 
+ * enter to submit your words. Quiz logic offloaded to NewQuiz object.
+ * @author bpar
+ *
+ */
 public class SpellScreenController {
 
 	
@@ -82,6 +87,7 @@ public class SpellScreenController {
 	@FXML
 	public void	handleStartSubmitButtonPressed(ActionEvent ae){
 		if(!inQuiz){
+			//If quiz has not started, instantiate quiz object and set up labels.
 			quiz = new NewQuiz();
 			Festival.FestivalService serv = Festival.getInstance();
 			wordUpTo = 1;
@@ -102,7 +108,9 @@ public class SpellScreenController {
 			quiz.speakWord();
 			startTime = System.currentTimeMillis();
 		}else{
+			//If currently in a quiz, get the entered word and submit it.
 			String answer = spellZone.getText();
+			//TODO check for non-letter characters
 			if(answer.equals("")){
 				return;
 			}

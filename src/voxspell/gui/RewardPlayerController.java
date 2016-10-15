@@ -11,7 +11,7 @@ import javafx.stage.WindowEvent;
 
 /**
  * This class is the controller for RewardVideoPlayer. It manages the button presses and
- * video play as well. Takebn from Ben's A3
+ * video play as well. Takebn from my Assignment 3
  * 
  * @author Ben Partridge
  */

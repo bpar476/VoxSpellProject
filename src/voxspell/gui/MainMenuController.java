@@ -1,6 +1,5 @@
 package voxspell.gui;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -13,6 +12,11 @@ import voxspell.Config;
 import voxspell.VoxSpell;
 import voxspell.quiz.QuizRules;
 
+/**
+ * Controller class for main menu. Handles button click events.
+ * @author bpar
+ *
+ */
 public class MainMenuController {
 	
 	private String nextWindow;
