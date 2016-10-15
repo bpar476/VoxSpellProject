@@ -33,6 +33,13 @@ import voxspell.quiz.QuizResults;
 import voxspell.quiz.QuizResults.Result;
 import voxspell.quiz.QuizRules;
 
+/**
+ * Controller class for the post-quiz summary. Takes results of quiz from SpellScreenController and 
+ * displays them in a nice format for user. Includes all words and how they did spelling them as 
+ * well as other information like score, best streak and time taken.
+ * @author bpar
+ *
+ */
 public class SummaryScreenController {
 
 	private static final String REWARD_SONG_LOCATION = System.getProperty("user.dir") + "/.Resources/media/milky-chu_-_With_You_And_Icecream_Flying_-_cut.mp3";
@@ -63,11 +70,13 @@ public class SummaryScreenController {
 	
 	private Media rewardSong;
 	private MediaPlayer rewardSongPlayer;
-	
-
 	private ObservableList<Result> resultsList;
 
-
+	/**
+	 * Moves the user back to the spelling interface at the next level of difficulty
+	 * for the current list. (Disabled if there is no next level).
+	 * @param ae ActionEvent triggered by button press.
+	 */
 	@FXML
 	public void handleNextLevel(ActionEvent ae){
 		QuizRules.setQuizType("New Quiz");
@@ -75,7 +84,12 @@ public class SummaryScreenController {
 		QuizRules.setWordListLocation(Config.getWordListLocation());
 		changeScene("SpellScreen.fxml");
 	}
-
+	
+	/**
+	 * Moves the user back to the spelling interface at the same level of difficulty
+	 * for the current list.
+	 * @param ae ActionEvent triggered by button press.
+	 */
 	@FXML
 	public void handleRetry(ActionEvent ae){
 		QuizRules.setQuizType("New Quiz");
@@ -137,6 +151,7 @@ public class SummaryScreenController {
 	 * @throws FileNotFoundException 
 	 */
 	public void setResults(QuizResults results) throws FileNotFoundException{		
+		//Looks through results object and sets all up the gui according to those values.
 		if(results.getScore() > results.answeredSize() * 0.9 & results.getBestStreak() == results.answeredSize()){
 			if(Config.isColourBlindMode()){
 				excellent.setTextFill(Color.BLUE);
@@ -201,6 +216,7 @@ public class SummaryScreenController {
 		}
 		if(QuizRules.getInstance().getLevel() == maxLevel){
 			nextLevelButton.setVisible(false);
+			//TODO tell user they are on the highest level.
 		}
 	}
 	

@@ -138,7 +138,7 @@ public class SpellScreenController {
 	}
 	
 	/**
-	 * Stops the quiz if the user is in an infinite quiz
+	 * Stops the current quiz (only available for quizess that have infinite length.
 	 */
 	@FXML
 	public void handleStopQuizPressed(ActionEvent ae){
@@ -209,15 +209,20 @@ public class SpellScreenController {
 	 * is correct.
 	 */
 	private void submit(String answer){
+		//Uses quiz object to determine correctness of user answer.
 		int result = quiz.compare(answer);
 		if(result == DummyQuiz.CORRECT_FIRST_TRY || result == DummyQuiz.CORRECT_SECOND_TRY){
+			//If it is correct, increment the score and tell user they got it right.
 			wordUpTo++;
 			incorrect.setVisible(false);
 			correct.setVisible(true);
 			score++;
 			streak++;
 		}else if(result == NewQuiz.WRONG_LAST_TRY){
+			//If they got the answer wrong and they have no more attempts, go to next word.
+			//Reset streak.
 			if(streak > highStreak){
+				//Check to see if the current streak is the highest the user has achieved the whole quiz.
 				highStreak = streak;
 			}
 			streak = 0;
@@ -225,6 +230,7 @@ public class SpellScreenController {
 			incorrect.setVisible(true);
 			wordUpTo++;
 		}else if(result == NewQuiz.WRONG_STILL_TRYING){
+			//Reset streak if they are still trying, but do not go to next word.
 			if(streak > highStreak){
 				highStreak = streak;
 			}
@@ -232,12 +238,15 @@ public class SpellScreenController {
 			correct.setVisible(false);
 			incorrect.setVisible(true);
 		}
+		//Reset labels
 		spellZone.setText("");
 		progressLabel.setText("Word " + wordUpTo + "/" + quiz.size());
 		previousEnterLabel.setText("You entered: " + answer);
 		scoreLabel.setText("Score: " + score);
 		streakLabel.setText("Streak: " + streak);
+		//Check if the quiz is ended and do necessary actions.
 		if(quiz.isEnded()){
+			//Store result metadata in QuizResults object.
 			endTime = System.currentTimeMillis();
 			results = quiz.getResults();
 			results.setTimeTaken(endTime - startTime);
@@ -252,6 +261,7 @@ public class SpellScreenController {
 			String[] listLocation = Config.getWordListLocation().split("/");
 			results.setWordlist(listLocation[listLocation.length-1]);
 			
+			//Udate user' bests.
 			User usr = Config.getUser();
 			if(score > usr.getBestScore()){
 				usr.setBestScore(score);
@@ -265,13 +275,12 @@ public class SpellScreenController {
 			}
 			usr.getHistory().add(results);
 						
-			//Load next screen and pass information to controller
+			//Load next screen and pass Result information to controller
 			Stage primaryStage = VoxSpell.getMainStage();
 			try {
 				FXMLLoader loader = new FXMLLoader();
 				Parent root = loader.load(getClass().getResource("ScoreSummary.fxml").openStream());
 				SummaryScreenController controller = (SummaryScreenController)loader.getController();
-				//Parent root = FXMLLoader.load(getClass().getResource("ScoreSummary.fxml"));
 				controller.setResults(results);
 				Scene scene = new Scene(root);
 				primaryStage.setScene(scene);
@@ -298,7 +307,7 @@ public class SpellScreenController {
 
 	
 	/**
-	 * Called by JavaFX framework to set up controller.
+	 * Called by JavaFX framework to set up GUI elements.
 	 */
 	@FXML
 	public void initialize(){

@@ -12,6 +12,8 @@ import voxspell.quiz.QuizResults.Result;
  *
  */
 public class WordCell extends ListCell<Result>{
+	//Sets the colour of the words in the list in the ScoreSummary screen according to colourblind
+	//mode and how correct the words in the Result object.
 	@Override
 	protected void updateItem(Result item, boolean empty){
 		if(item != null){
