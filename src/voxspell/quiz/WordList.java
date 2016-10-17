@@ -7,13 +7,25 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class representing the word list used in a quiz. Looks through
+ * the file and creates the list of words to be quizzed.
+ * @author bpar
+ *
+ */
 public class WordList {
 
 	private File wordListFile;
 	private ArrayList<String> wordList;
 	int level;
 	boolean levelFound;
-
+	
+	/**
+	 * Uses the location and chosen level to build a word list from the word list file
+	 * at "location".
+	 * @param location The path of the word list file
+	 * @param chosenLevel The level to create the spelling list from.
+	 */
 	public WordList(String location, int chosenLevel){
 		wordList = new ArrayList<>();
 		levelFound = false;
@@ -22,16 +34,16 @@ public class WordList {
 
 		buildWordList();
 	}
-
+	
+	/**
+	 * Returns the actual wordlist to be used in a quiz
+	 * @return
+	 */
 	public ArrayList<String> getWordList(){
 		return wordList;
 	}
-
-	public void nextLevel(){
-		level++;
-		buildWordList();
-	}
-
+	
+	//Helper method to read the file and actually convert it into a wordlist.
 	private void buildWordList(){
 		BufferedReader rdr = null;
 		try {

@@ -3,7 +3,12 @@ package voxspell.quiz;
 import voxspell.festival.Festival;
 import voxspell.festival.Festival.FestivalService;
 
-public class DummyQuiz implements Quiz {
+/**
+ * Class initially used to test the Spell screen gui.
+ * @author bpar
+ *
+ */
+public class DummyQuiz{
 	
 	public static final int CORRECT_FIRST_TRY = 0;
 	public static final int CORRECT_SECOND_TRY = 1;

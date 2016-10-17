@@ -1,0 +1,19 @@
+.root{
+	-fx-background-color: #5D99FF;
+	-fx-font-family: "Deja vu sans mono";
+	-fx-text-fill: white;
+}
+
+.button{
+	-fx-background-color: #34558E;
+	
+	-fx-text-fill: white;
+}
+
+.button:hover{
+	-fx-background-color: #7088AF;
+}
+
+.label{
+	-fx-text-fill: white;
+}

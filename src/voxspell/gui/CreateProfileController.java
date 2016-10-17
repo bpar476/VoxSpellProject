@@ -47,7 +47,7 @@ public class CreateProfileController {
 	private Label passwordMismatch;
 	@FXML
 	private Label usernameTaken;
-	
+
 	/**
 	 * Handles action for when the user clicks the "finished" button to finish creating their profile.
 	 * Checks that the username and password fields are not empty and then takes the user back to the login
@@ -59,34 +59,12 @@ public class CreateProfileController {
 		noUsername.setVisible(false);
 		noPassword.setVisible(false);
 		passwordMismatch.setVisible(false);
-		
+		usernameTaken.setVisible(false);
+
 		String confirmedPassword = confirmPasswordField.getText();
 		String username = usernameField.getText();
 		String password = passwordField.getText();
-		try {
-			BufferedReader rdr = new BufferedReader(new FileReader(userInfoFile));
-			String line;
-			try {
-				//Check to make sure that username is not already taken.
-				while((line = rdr.readLine()) != null){
-					if(username.equals(line.split(":")[0])){
-						usernameTaken.setVisible(true);
-						return;
-					}
-				}
-				rdr.close();
-			} catch (IOException e) {
-				System.err.println("Fatal error: unable to access user info file");
-			}
-		} catch (FileNotFoundException e1) {
-			try {
-				userInfoFile.createNewFile();
-			} catch (IOException e) {
-				System.err.println("Fatal error: unable to create/read user data file");
-				e.printStackTrace();
-			}
-		}
-		
+
 		//Make sure something is actually entered in each field.
 		if(username.equals("")){
 			noUsername.setVisible(true);
@@ -95,6 +73,31 @@ public class CreateProfileController {
 		}else if(!password.equals(confirmedPassword)){
 			passwordMismatch.setVisible(true);
 		}else{
+
+			try {
+				BufferedReader rdr = new BufferedReader(new FileReader(userInfoFile));
+				String line;
+				try {
+					//Check to make sure that username is not already taken.
+					while((line = rdr.readLine()) != null){
+						if(username.equals(line.split(":")[0])){
+							usernameTaken.setVisible(true);
+							return;
+						}
+					}
+					rdr.close();
+				} catch (IOException e) {
+					System.err.println("Fatal error: unable to access user info file");
+				}
+			} catch (FileNotFoundException e1) {
+				try {
+					userInfoFile.createNewFile();
+				} catch (IOException e) {
+					System.err.println("Fatal error: unable to create/read user data file");
+					e.printStackTrace();
+				}
+			}
+
 			//If all fields are filled correctly, write information to file holding user data.
 			PrintWriter wr = null;
 			try {
@@ -110,7 +113,7 @@ public class CreateProfileController {
 			changeScene("LoginScreen.fxml");
 		}
 	}
-	
+
 	/**
 	 * Takes user back to login screen if they decide they don't need to create an account.
 	 * @param ae

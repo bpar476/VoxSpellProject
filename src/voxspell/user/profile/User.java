@@ -8,6 +8,12 @@ import java.io.Serializable;
 
 import voxspell.user.statistics.QuizHistory;
 
+/**
+ * Class to represent a user of the application. Stores their result history as well as
+ * user credentials (username and password).
+ * @author bpar
+ *
+ */
 public class User implements Serializable{
 	
 	private static final String FILE_LOCATION = System.getProperty("user.dir") + "/.Resources/data/";
@@ -23,6 +29,8 @@ public class User implements Serializable{
 		history = new QuizHistory(this);
 		this.username = username;
 	}
+	
+	//Getters and setters for statistics
 	
 	public int getHighestLevel(){
 		return highestLevel;
@@ -56,11 +64,18 @@ public class User implements Serializable{
 		bestStreak = streak;
 	}
 	
+	/**
+	 * Creates a simple string representation of the user (their username).
+	 */
 	@Override
 	public String toString(){
 		return this.username;
 	}
 	
+	/**
+	 * Returns the user's quiz history object. Holding their last 20 quiz results.
+	 * @return
+	 */
 	public QuizHistory getHistory(){
 		return this.history;
 	}

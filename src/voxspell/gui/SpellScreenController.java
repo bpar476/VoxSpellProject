@@ -283,6 +283,7 @@ public class SpellScreenController {
 				SummaryScreenController controller = (SummaryScreenController)loader.getController();
 				controller.setResults(results);
 				Scene scene = new Scene(root);
+				scene.getStylesheets().add(DetailedStatisticsScreenController.class.getResource("main.css").toExternalForm());
 				primaryStage.setScene(scene);
 				primaryStage.show();
 			} catch (IOException e) {

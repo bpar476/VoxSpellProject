@@ -28,7 +28,7 @@ import voxspell.quiz.QuizResults;
  *
  */
 public class DetailedStatisticsScreenController {
-	
+
 	@FXML
 	private TableView<QuizResults> quizTable;
 	@FXML
@@ -47,7 +47,7 @@ public class DetailedStatisticsScreenController {
 	private Button back;
 	@FXML
 	private Button moreDetails;
-	
+
 	/**
 	 * Takes the user back to the previous screen (Score history screen).
 	 * @param ae
@@ -64,35 +64,39 @@ public class DetailedStatisticsScreenController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Loads up the results from the table and launches the score summary screen with those results.
 	 * @param ae
 	 */
 	@FXML
 	public void moreDetailsPressed(ActionEvent ae){
+		QuizResults res = quizTable.getSelectionModel().getSelectedItem();
 		Stage primaryStage = VoxSpell.getMainStage();
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			//May need to create another pane or make screen use a different controller.
-			Parent root = loader.load(getClass().getResource("ScoreSummary.fxml").openStream());
-			SummaryScreenController controller = (SummaryScreenController)loader.getController();
-			//TODO Get results from table
-			controller.setResults(quizTable.getSelectionModel().getSelectedItem());			
-			
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(res != null){
+			try {
+				FXMLLoader loader = new FXMLLoader();
+				//May need to create another pane or make screen use a different controller.
+				Parent root = loader.load(getClass().getResource("ScoreSummary.fxml").openStream());
+				SummaryScreenController controller = (SummaryScreenController)loader.getController();
+				//TODO Get results from table
+				controller.setResults(res);			
+
+				Scene scene = new Scene(root);
+				scene.getStylesheets().add(DetailedStatisticsScreenController.class.getResource("main.css").toExternalForm());
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	
+
 	@FXML
 	public void initialize(){
 		fillTable();
 	}
-	
+
 	/*
 	 * Sets up data to fill the table by specifying what fields the cell value factory should use.
 	 */
@@ -104,13 +108,13 @@ public class DetailedStatisticsScreenController {
 		scoreCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Number>("score"));
 		streakCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Number>("bestStreak"));
 		levelCol.setCellValueFactory(new PropertyValueFactory<QuizResults,Number>("level"));
-		
+
 		Iterator<QuizResults> resultIterator = Config.getUser().getHistory().iterator();
 		//Adds actual data to the table dataset.
 		while(resultIterator.hasNext()){
 			data.add(resultIterator.next());
 		}
-		
+
 		quizTable.setItems(data);
 	}
 }

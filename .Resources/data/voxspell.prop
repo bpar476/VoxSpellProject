@@ -1,5 +1,5 @@
 startlevel=3
-wordlist=newList.txt
-colourblind=false
+wordlist=NZCER-spelling-lists.txt
+colourblind=true
 voice=New Zealand
 music_disabled=false

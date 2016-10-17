@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -9,19 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="454.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voxspell.gui.SummaryScreenController">
+<AnchorPane prefHeight="390.0" prefWidth="441.0" stylesheets="@../../NewFile.css" xmlns="http://javafx.com/javafx/8" fx:controller="voxspell.gui.SummaryScreenController"xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane prefHeight="454.0" prefWidth="533.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <top>
-            <Label text="Quiz Summary" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="DejaVu Sans Mono Bold" size="23.0" />
-               </font>
-               <BorderPane.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </BorderPane.margin>
-            </Label>
-         </top>
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="454.0" prefWidth="533.0">
          <center>
             <HBox prefHeight="454.0" prefWidth="533.0" BorderPane.alignment="CENTER">
                <children>
@@ -44,77 +32,77 @@
                   <VBox prefHeight="405.0" prefWidth="231.0">
                      <children>
                         <Button fx:id="nextLevelButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleNextLevel" prefHeight="33.0" prefWidth="150.0" text="Next Level" textAlignment="CENTER" visible="false">
-                           <VBox.margin>
-                              <Insets left="20.0" top="10.0" />
-                           </VBox.margin>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleRetry" prefHeight="33.0" prefWidth="150.0" text="Retry">
                            <VBox.margin>
                               <Insets left="20.0" top="10.0" />
                            </VBox.margin>
+                        </Button>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleRetry" prefHeight="33.0" prefWidth="150.0" text="Retrys">
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </VBox.margin>
                         </Button>
                         <Button fx:id="playVideo" mnemonicParsing="false" onAction="#handleRewardVideo" prefWidth="150.0" text="Reward Video" textAlignment="CENTER" visible="false">
-                           <VBox.margin>
-                              <Insets left="20.0" top="10.0" />
-                           </VBox.margin>
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </VBox.margin>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleMainMenu" text="Main Menu">
-                           <VBox.margin>
-                              <Insets left="20.0" top="40.0" />
-                           </VBox.margin>
                            <font>
                               <Font size="15.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="40.0" />
+                           </VBox.margin>
                         </Button>
                         <Label fx:id="levelLabel" text="Level: X">
-                           <VBox.margin>
-                              <Insets left="20.0" top="10.0" />
-                           </VBox.margin>
                            <font>
                               <Font size="17.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </VBox.margin>
                         </Label>
                         <Label fx:id="scoreLabel" text="Score: X">
-                           <VBox.margin>
-                              <Insets left="20.0" />
-                           </VBox.margin>
                            <font>
                               <Font size="25.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
                         </Label>
                         <Label fx:id="streakLabel" text="Best Streak: X">
-                           <VBox.margin>
-                              <Insets left="20.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets top="10.0" />
-                           </padding>
                            <font>
                               <Font size="20.0" />
                            </font>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
                         </Label>
                         <Label fx:id="timeLabel" text="Time: ">
-                           <VBox.margin>
-                              <Insets left="20.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets top="10.0" />
-                           </padding>
                            <font>
                               <Font size="20.0" />
                            </font>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
                         </Label>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
@@ -148,6 +136,16 @@
                </children>
             </HBox>
          </center>
+         <top>
+            <Label text="Quiz Summary" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="23.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
       </BorderPane>
    </children>
 </AnchorPane>

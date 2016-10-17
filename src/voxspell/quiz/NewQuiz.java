@@ -52,22 +52,6 @@ public class NewQuiz {
 		numTries = 0;
 	}
 	
-	public NewQuiz(int level){
-		results = new QuizResults();
-		rules = QuizRules.getInstance();
-		WordList wordList = new WordList(rules.getWordListLocation(), level);
-		//Set up wordList
-		wordsInLevel = wordList.getWordList();
-		wordsToQuiz = new ArrayList<>();
-		
-		Collections.shuffle(wordsInLevel);
-		for(int i = 0; i < rules.getNumWordsInQuiz() & i < wordsInLevel.size(); i++){
-			wordsToQuiz.add(wordsInLevel.get(i));
-		}
-		//Initialise some instance variables.
-		numTries = 0;
-	}
-	
 	/**
 	 * @return The word that the user most recently spelled.
 	 */

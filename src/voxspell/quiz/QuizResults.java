@@ -7,6 +7,13 @@ import java.util.Iterator;
 
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * Class used to store information about a single quiz. Includes score,
+ * The words the user spelled and the result they had with them. Also implements
+ * serializable so that it can be stored.
+ * @author bpar
+ *
+ */
 public class QuizResults implements Serializable{
 
 	private static final long serialVersionUID = 3992581471467692760L;
@@ -36,6 +43,8 @@ public class QuizResults implements Serializable{
 		results.add(new Result(word, score, attempts));
 	}
 	
+	//Getters and Setters...
+	
 	public void setQuizType(String type){
 		quizType = type;
 		quizTypeProperty = new SimpleStringProperty(quizType);
@@ -53,13 +62,6 @@ public class QuizResults implements Serializable{
 		return quizType;
 	}
 	
-	public int answeredSize(){
-		return results.size();
-	}
-	
-	public Iterator<Result> iterator(){
-		return results.iterator();
-	}
 	
 	public void setScore(int score){
 		this.score = score;
@@ -120,6 +122,22 @@ public class QuizResults implements Serializable{
 	public void setWordlist(String wordlist) {
 		this.wordlist = wordlist;
 		wordlistProperty = new SimpleStringProperty(wordlist);
+	}
+	
+	/**
+	 * Returns the number of words that the user attempted to spell in this quiz.
+	 * @return
+	 */
+	public int answeredSize(){
+		return results.size();
+	}
+	
+	/**
+	 * Returns an Iterator object to iterate over all the word Results stored in this object.
+	 * @return
+	 */
+	public Iterator<Result> iterator(){
+		return results.iterator();
 	}
 
 	/**

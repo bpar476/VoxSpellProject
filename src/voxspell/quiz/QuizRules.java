@@ -1,5 +1,11 @@
 package voxspell.quiz;
 
+/**
+ * Singleton class holding the current rules for spelling quizzes. Parameters can be set and reset
+ * and are used to create Quiz objects at runtime.
+ * @author bpar
+ *
+ */
 public class QuizRules {
 	
 	private static final int DEFAULT_NUM_CHANCES = 2;
