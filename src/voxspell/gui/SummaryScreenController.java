@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -49,6 +48,10 @@ public class SummaryScreenController {
 	private Button playVideo;
 	@FXML
 	private Button nextLevelButton;
+	@FXML
+	private Button backToStats;
+	@FXML
+	private Button mainMenuButton;
 	@FXML
 	private Label levelLabel;
 	@FXML
@@ -237,6 +240,20 @@ public class SummaryScreenController {
 			System.err.println("Error opening web browser, check your internet connection");
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Sets so that instead of returning to the main menu screen, the
+	 * return location becomes the statistics screen.
+	 */
+	protected void setPrevScreenStats(){
+		backToStats.setVisible(true);
+		mainMenuButton.setVisible(false);
+	}
+	
+	@FXML
+	public void handleBackToStatsPressed(){
+		changeScene("DetailedStatsScreen.fxml");
 	}
 	
 	@FXML

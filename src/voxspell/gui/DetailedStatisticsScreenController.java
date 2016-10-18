@@ -81,7 +81,7 @@ public class DetailedStatisticsScreenController {
 				SummaryScreenController controller = (SummaryScreenController)loader.getController();
 				//TODO Get results from table
 				controller.setResults(res);			
-
+				controller.setPrevScreenStats();
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add(DetailedStatisticsScreenController.class.getResource("main.css").toExternalForm());
 				primaryStage.setScene(scene);
