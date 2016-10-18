@@ -1,7 +1,6 @@
 .root{
 	-fx-background-color: #5D99FF;
 	-fx-font-family: "Deja vu sans mono";
-	-fx-text-fill: white;
 }
 
 .button{
@@ -17,3 +16,8 @@
 .label{
 	-fx-text-fill: white;
 }
+
+.table-view .column-header .label{
+	-fx-text-fill: gray;
+}
+

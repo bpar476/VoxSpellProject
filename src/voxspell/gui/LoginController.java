@@ -77,7 +77,6 @@ public class LoginController {
 		//Reads throught the user info file and checks supplied credentials against database.
 		String line;
 		try {
-			rdr.readLine();
 			while((line = rdr.readLine())!=null){
 				String[] userData = line.split(":");
 				if(usernameField.getText().equals(userData[0])){

@@ -168,6 +168,7 @@ public class SpellScreenController {
 				//Parent root = FXMLLoader.load(getClass().getResource("ScoreSummary.fxml"));
 				controller.setResults(results);
 				Scene scene = new Scene(root);
+				scene.getStylesheets().add(DetailedStatisticsScreenController.class.getResource("main.css").toExternalForm());
 				primaryStage.setScene(scene);
 				primaryStage.show();
 			} catch (IOException e) {

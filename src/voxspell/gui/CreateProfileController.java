@@ -82,6 +82,7 @@ public class CreateProfileController {
 					while((line = rdr.readLine()) != null){
 						if(username.equals(line.split(":")[0])){
 							usernameTaken.setVisible(true);
+							rdr.close();
 							return;
 						}
 					}
@@ -101,15 +102,19 @@ public class CreateProfileController {
 			//If all fields are filled correctly, write information to file holding user data.
 			PrintWriter wr = null;
 			try {
-				wr = new PrintWriter(new FileWriter(userInfoFile));
+				wr = new PrintWriter(new FileWriter(userInfoFile, true));
+				//Store password hashcode for security.
+
+				String line;
+				//Check to make sure that username is not already taken.
+				wr.append(username + ":" + password.hashCode() + "\n");
+				wr.flush();
+				wr.close();
 			} catch (IOException e) {
 				System.err.println("Fatal Error: unable to write to user info file.");
 				e.printStackTrace();
 			}
-			//Store password hashcode for security.
-			wr.append("\n" + username + ":" + password.hashCode());
-			wr.flush();
-			wr.close();
+			SettingsController.reset();
 			changeScene("LoginScreen.fxml");
 		}
 	}

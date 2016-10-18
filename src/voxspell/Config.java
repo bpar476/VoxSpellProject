@@ -21,6 +21,7 @@ public class Config {
 		return usr;
 	}
 	
+	
 	/**
 	 * Sets the active user.
 	 * @param user The user that is currently logged into the application.

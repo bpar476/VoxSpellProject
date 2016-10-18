@@ -346,6 +346,27 @@ public class SettingsController {
 			wordListsBox.setItems(wordLists);
 		}
 	}
+	
+	public static void reset(){
+		String wordList = "NZCER-spelling-lists.txt";
+		String startLevel = "1";
+		String voice = "American";
+
+		try {
+			File voxspellProp = new File(System.getProperty("user.dir") + PROPERTIES_EXTENSION);
+			voxspellProp.delete();
+			voxspellProp.createNewFile();
+			PrintWriter wr = new PrintWriter(voxspellProp);
+			wr.append("startlevel=" + startLevel + "\n");
+			wr.append("wordlist=" + wordList + "\n");
+			wr.append("colourblind=" + false + "\n");
+			wr.append("voice=" + voice + "\n");
+			wr.append("music_disabled=" + false + "\n");
+			wr.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Sets up values in combo boxes when scene is loaded.

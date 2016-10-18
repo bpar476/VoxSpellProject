@@ -45,17 +45,17 @@ public class ScoreHistoryController {
 	private Label strongestListLabel;
 	@FXML
 	private Label highestLevelLabel;
-	
+
 	@FXML
 	public void handleMainMenuPressed(ActionEvent ae){
 		changeScene("MainMenu.fxml");
 	}
-	
+
 	@FXML
 	public void handleFullDetailPressed(){
 		changeScene("DetailedStatsScreen.fxml");
 	}
-	
+
 	/**
 	 * Does some setup before the scene loads. Fills the chart and puts the detail in the user's
 	 * Personal bests summary.
@@ -65,10 +65,10 @@ public class ScoreHistoryController {
 		//Set up chart
 		final CategoryAxis xAxis = new CategoryAxis();
 		final NumberAxis yAxis = new NumberAxis();
-		
+
 		xAxis.setLabel("Date");
 		yAxis.setLabel("Score");
-		
+
 		//Fills chart with
 		XYChart.Series series = new XYChart.Series();
 		QuizHistory history = Config.getUser().getHistory();
@@ -80,15 +80,20 @@ public class ScoreHistoryController {
 			i++;
 		}
 		lastTenQuizzes.getData().add(series);
-		
+
 		User usr = Config.getUser();
 		bestScoreLabel.setText("Best score: " + usr.getBestScore());
 		bestStreakLabel.setText("Best streak: " + usr.getBestStreak());
-		strongestListLabel.setText("Best wordlist: " + usr.getBestList());
+		String wordList = usr.getBestList();
+		if(wordList == null){
+			strongestListLabel.setText("Best wordlist: N/A");
+		}else{
+			strongestListLabel.setText("Best wordlist: " + usr.getBestList());
+		}
 		highestLevelLabel.setText("Highest level: " + usr.getHighestLevel());
-		
+
 	}
-	
+
 	//Helper method to change the scene.
 	private void changeScene(String fxmlFile){
 		Stage primaryStage = VoxSpell.getMainStage();

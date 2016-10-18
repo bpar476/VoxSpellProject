@@ -11,7 +11,7 @@ public class QuizRules {
 	private static final int DEFAULT_NUM_CHANCES = 2;
 	private static final int DEFAULT_START_LEVEL = 1;
 	private static final String DEFAULT_WORD_LIST = (System.getProperty("user.dir") + "/.Resources/wordlists/NZCER-spelling-lists.txt");
-	private static final int DEFAULT_QUIZ_SIZE = 1;
+	private static final int DEFAULT_QUIZ_SIZE = 10 ;
 	private static final String DEFAULT_QUIZ_TYPE = "Spelling Quiz";
 	
 	private static QuizRules singleton;
