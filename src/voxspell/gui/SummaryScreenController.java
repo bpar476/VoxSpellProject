@@ -82,7 +82,6 @@ public class SummaryScreenController {
 	 */
 	@FXML
 	public void handleNextLevel(ActionEvent ae){
-		QuizRules.setQuizType("New Quiz");
 		QuizRules.setStartLevel(QuizRules.getInstance().getLevel() + 1);
 		QuizRules.setWordListLocation(Config.getWordListLocation());
 		changeScene("SpellScreen.fxml");
@@ -95,7 +94,6 @@ public class SummaryScreenController {
 	 */
 	@FXML
 	public void handleRetry(ActionEvent ae){
-		QuizRules.setQuizType("New Quiz");
 		QuizRules.setStartLevel(Config.getStartLevel());
 		QuizRules.setWordListLocation(Config.getWordListLocation());
 		changeScene("SpellScreen.fxml");

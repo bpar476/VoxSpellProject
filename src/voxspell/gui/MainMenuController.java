@@ -101,6 +101,7 @@ public class MainMenuController {
 			SpellScreenController controller = loader.getController();
 			controller.setQuiz(quiz);
 			Scene scene = new Scene(root);
+			scene.getStylesheets().add(DetailedStatisticsScreenController.class.getResource("main.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {

@@ -12,22 +12,17 @@ public class QuizRules {
 	private static final int DEFAULT_START_LEVEL = 1;
 	private static final String DEFAULT_WORD_LIST = (System.getProperty("user.dir") + "/.Resources/wordlists/NZCER-spelling-lists.txt");
 	private static final int DEFAULT_QUIZ_SIZE = 10 ;
-	private static final String DEFAULT_QUIZ_TYPE = "Spelling Quiz";
 	
 	private static QuizRules singleton;
 	private static boolean locationSet;
 	private static boolean levelSet;
 	private static boolean numSet;
 	private static boolean chanceSet;
-	private static boolean typeSet;
-	private static boolean infiniteSet;
 	
 	private String wordListLocation;
-	private String quizType;
 	private int startLevel;
 	private int numWordsInQuiz;
 	private int numChances;
-	private boolean infinite;
 	
 	public static void setWordListLocation(String location){
 		if(singleton == null){
@@ -37,13 +32,6 @@ public class QuizRules {
 		locationSet = true;
 	}
 	
-	public static void setQuizType(String quizType) {
-		if(singleton == null){
-			singleton = new QuizRules();
-		}
-		singleton.quizType = quizType;
-		typeSet = true;
-	}
 	
 	public static void setStartLevel(int level){
 		if(singleton == null){
@@ -69,13 +57,6 @@ public class QuizRules {
 		chanceSet = true;
 	}
 	
-	public static void setInfinite(boolean inf){
-		if(singleton == null){
-			singleton = new QuizRules();
-		}
-		singleton.infinite = inf;
-		infiniteSet = true;
-	}
 	
 	/**
 	 * Resets all the fields in the QuizRules object.
@@ -86,12 +67,8 @@ public class QuizRules {
 		levelSet = false;
 		locationSet = false;
 		numSet = false;
-		infiniteSet = false;
 	}
 	
-	public boolean isInfinite(){
-		return infinite;
-	}
 	
 	public String getWordListLocation() {
 		return wordListLocation;
@@ -109,9 +86,6 @@ public class QuizRules {
 		return numChances;
 	}
 	
-	public String getQuizType() {
-		return quizType;
-	}
 	
 	/**
 	 * Returns the singleton QuizRuels instance and gives it default values if certain
@@ -133,12 +107,6 @@ public class QuizRules {
 		}
 		if(!numSet){
 			singleton.numWordsInQuiz = DEFAULT_QUIZ_SIZE;
-		}
-		if(!typeSet){
-			singleton.quizType = DEFAULT_QUIZ_TYPE;
-		}
-		if(!infiniteSet){
-			singleton.infinite = false;
 		}
 		return singleton;
 	}
