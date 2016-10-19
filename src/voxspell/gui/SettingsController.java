@@ -257,7 +257,7 @@ public class SettingsController {
 				while((line = rdr.readLine()) != null){
 					if(line.charAt(0) == '%'){
 						String[] levelLine = line.split("\\s+");
-						if(Integer.parseInt(levelLine[1]) <= Config.getUser().getHighestLevel()){
+						if(Integer.parseInt(levelLine[1]) <= Config.getUser().getUnlockedLevel()){
 							levels.add(levelLine[1]);
 						}
 					}
@@ -416,7 +416,7 @@ public class SettingsController {
 					while((levelLine = levelReader.readLine()) != null){
 						if(levelLine.charAt(0) == '%'){
 							String[] splitLev = levelLine.split("\\s+");
-							if(Integer.parseInt(splitLev[1]) <= Config.getUser().getHighestLevel()){
+							if(Integer.parseInt(splitLev[1]) <= Config.getUser().getUnlockedLevel()){
 								levels.add(splitLev[1]);
 							}
 						}

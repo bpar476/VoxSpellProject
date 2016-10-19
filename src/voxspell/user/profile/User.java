@@ -24,8 +24,10 @@ public class User implements Serializable{
 	private int bestStreak;
 	private String bestWordList;
 	private int highestLevel;
+	private int unlockedLevel;
 	
 	public User(String username){
+		unlockedLevel = 1;
 		history = new QuizHistory(this);
 		this.username = username;
 	}
@@ -34,6 +36,10 @@ public class User implements Serializable{
 	
 	public int getHighestLevel(){
 		return highestLevel;
+	}
+	
+	public int getUnlockedLevel(){
+		return unlockedLevel;
 	}
 	
 	public int getBestScore(){
@@ -54,6 +60,10 @@ public class User implements Serializable{
 	
 	public void setBestScore(int score){
 		bestScore = score;
+	}
+	
+	public void unlockLevel(int level){
+		unlockedLevel = level;
 	}
 	
 	public void setBestWordList(String listname){

@@ -76,7 +76,9 @@ public class ScoreHistoryController {
 		int i = 0;
 		while(resultsIterator.hasNext() & i < 10){
 			QuizResults results = resultsIterator.next();
-			series.getData().add(new XYChart.Data<>("Quiz: " + (i+1),results.getScore()));
+			if(results.getQuizType().equals("New Quiz")){
+				series.getData().add(new XYChart.Data<>("Quiz: " + (i+1),results.getScore()));
+			}
 			i++;
 		}
 		lastTenQuizzes.getData().add(series);
