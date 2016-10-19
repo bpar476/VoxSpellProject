@@ -8,18 +8,13 @@ import voxspell.festival.Festival.FestivalService;
  * @author bpar
  *
  */
-public class DummyQuiz{
-	
-	public static final int CORRECT_FIRST_TRY = 0;
-	public static final int CORRECT_SECOND_TRY = 1;
-	public static final int WRONG_FIRST_TRY = 2;
-	public static final int WRONG_SECOND_TRY = 3;
+public class DummyQuiz implements Quiz{
 		
 	public int compare(String answer){
 		if(answer.equalsIgnoreCase("word")){
 			return CORRECT_FIRST_TRY;
 		}else{
-			return WRONG_SECOND_TRY;
+			return WRONG_LAST_TRY;
 		}
 	}
 	
@@ -31,5 +26,25 @@ public class DummyQuiz{
 		FestivalService serv = Festival.getInstance();
 		serv.announce("Word");
 		serv.restart();
+	}
+
+	@Override
+	public int size() {
+		return 0;
+	}
+
+	@Override
+	public int getLevel() {
+		return 0;
+	}
+
+	@Override
+	public QuizResults getResults() {
+		return null;
+	}
+
+	@Override
+	public String getType() {
+		return "Dummy Quiz";
 	}
 }

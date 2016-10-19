@@ -22,6 +22,8 @@ import voxspell.VoxSpell;
 import voxspell.festival.Festival;
 import voxspell.quiz.DummyQuiz;
 import voxspell.quiz.NewQuiz;
+import voxspell.quiz.PracticeQuiz;
+import voxspell.quiz.Quiz;
 import voxspell.quiz.QuizResults;
 import voxspell.quiz.QuizRules;
 import voxspell.user.profile.User;
@@ -38,7 +40,7 @@ public class SpellScreenController {
 	
 	//functional fields
 	private boolean inQuiz;
-	private NewQuiz quiz;
+	private Quiz quiz;
 	private int wordUpTo;
 	private int score;
 	private int streak;
@@ -87,8 +89,8 @@ public class SpellScreenController {
 	@FXML
 	public void	handleStartSubmitButtonPressed(ActionEvent ae){
 		if(!inQuiz){
+			quizTypeLabel.setText(quiz.getType());
 			//If quiz has not started, instantiate quiz object and set up labels.
-			quiz = new NewQuiz();
 			Festival.FestivalService serv = Festival.getInstance();
 			wordUpTo = 1;
 			serv.announce("Starting new quiz");
@@ -97,7 +99,7 @@ public class SpellScreenController {
 			spellZone.setDisable(false);
 			inQuiz = true;
 			startSubmit.setText("Submit");
-			if(quiz.isInfinite()){
+			if(quiz instanceof PracticeQuiz){
 				progressLabel.setVisible(false);
 				endQuiz.setVisible(true);
 			}else{
@@ -212,14 +214,14 @@ public class SpellScreenController {
 	private void submit(String answer){
 		//Uses quiz object to determine correctness of user answer.
 		int result = quiz.compare(answer);
-		if(result == DummyQuiz.CORRECT_FIRST_TRY || result == DummyQuiz.CORRECT_SECOND_TRY){
+		if(result == Quiz.CORRECT_FIRST_TRY || result == Quiz.CORRECT_NOT_FIRST_TRY){
 			//If it is correct, increment the score and tell user they got it right.
 			wordUpTo++;
 			incorrect.setVisible(false);
 			correct.setVisible(true);
 			score++;
 			streak++;
-		}else if(result == NewQuiz.WRONG_LAST_TRY){
+		}else if(result == Quiz.WRONG_LAST_TRY){
 			//If they got the answer wrong and they have no more attempts, go to next word.
 			//Reset streak.
 			if(streak > highStreak){
@@ -230,7 +232,7 @@ public class SpellScreenController {
 			correct.setVisible(false);
 			incorrect.setVisible(true);
 			wordUpTo++;
-		}else if(result == NewQuiz.WRONG_STILL_TRYING){
+		}else if(result == Quiz.WRONG_STILL_TRYING){
 			//Reset streak if they are still trying, but do not go to next word.
 			if(streak > highStreak){
 				highStreak = streak;
@@ -307,6 +309,13 @@ public class SpellScreenController {
 		Festival.getInstance().restart();
 	}
 
+	/**
+	 * Used by the GUI to define what type of Quiz the SpellScreen should load.
+	 * @param quiz
+	 */
+	protected void setQuiz(Quiz quiz){
+		this.quiz = quiz;
+	}
 	
 	/**
 	 * Called by JavaFX framework to set up GUI elements.
@@ -319,7 +328,6 @@ public class SpellScreenController {
 		score = 0;
 		streak = 0;
 		QuizRules rules = QuizRules.getInstance();
-		quizTypeLabel.setText(rules.getQuizType());
 		String listLocation = rules.getWordListLocation();
 		String[] path = listLocation.split("/");
 		String basename = path[path.length-1];

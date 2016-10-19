@@ -10,6 +10,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import voxspell.Config;
 import voxspell.VoxSpell;
+import voxspell.quiz.NewQuiz;
+import voxspell.quiz.PracticeQuiz;
+import voxspell.quiz.Quiz;
 import voxspell.quiz.QuizRules;
 
 /**
@@ -28,10 +31,9 @@ public class MainMenuController {
 	@FXML
 	public void handleStartQuizPressed(ActionEvent ae){
 		nextWindow = "SpellScreen.fxml";
-		QuizRules.setQuizType("New Quiz");
 		QuizRules.setStartLevel(Config.getStartLevel());
 		QuizRules.setWordListLocation(Config.getWordListLocation());
-		changeScene();
+		loadSpellScreen(new NewQuiz());
 	}
 	
 	/**
@@ -41,14 +43,11 @@ public class MainMenuController {
 	@FXML
 	public void handlePracticePressed(ActionEvent ae){
 		nextWindow = "SpellScreen.fxml";
-		QuizRules.setQuizType("Practice quiz");
-		QuizRules.setInfinite(true);
 		QuizRules.setNumWordsInQuiz(Integer.MAX_VALUE);
 		QuizRules.setNumChances(-1);
 		QuizRules.setStartLevel(Config.getStartLevel());
-		QuizRules.setQuizType("Practice quiz");
 		QuizRules.setWordListLocation(Config.getWordListLocation());
-		changeScene();
+		loadSpellScreen(new PracticeQuiz());
 	}
 	
 	/**
@@ -86,6 +85,21 @@ public class MainMenuController {
 		Stage primaryStage = VoxSpell.getMainStage();
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource(nextWindow));
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void loadSpellScreen(Quiz quiz){
+		Stage primaryStage = VoxSpell.getMainStage();
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			Parent root = loader.load(getClass().getResource(nextWindow).openStream());
+			SpellScreenController controller = loader.getController();
+			controller.setQuiz(quiz);
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();

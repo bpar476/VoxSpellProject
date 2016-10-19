@@ -14,22 +14,16 @@ import voxspell.festival.Festival.FestivalService;
  * @author Ben Partridge
  *
  */
-public class NewQuiz {
-
-	//Static constants representing answer statistic
-	public static final int CORRECT_FIRST_TRY = 0;
-	public static final int CORRECT_NOT_FIRST_TRY = 1;
-	public static final int WRONG_STILL_TRYING = 2;
-	public static final int WRONG_LAST_TRY = 3;
+public class NewQuiz implements Quiz{
 	
 	//Instance variables
 	private ArrayList<String> wordsInLevel;
-	private List<String> wordsToQuiz;
-	private int upToWordIndex;
-	private int numTries;
+	protected List<String> wordsToQuiz;
+	protected int upToWordIndex;
+	protected int numTries;
 	private QuizResults results;
 	private QuizRules rules;
-	private boolean infinite;
+	protected String type;
 	
 	/**
 	 * Constructor initialises quiz from given level. Creates 10 word list of words to spell from the
@@ -37,6 +31,7 @@ public class NewQuiz {
 	 * @param startLevel The difficulty level to start the quiz from.
 	 */
 	public NewQuiz(){
+		type = "New Quiz";
 		results = new QuizResults();
 		rules = QuizRules.getInstance();
 		WordList wordList = new WordList(rules.getWordListLocation(), rules.getLevel());
@@ -81,11 +76,6 @@ public class NewQuiz {
 			if(upToWordIndex == wordsToQuiz.size()-1){
 				//End of quiz, do not prompt for next word.
 				serv.announce("Correct");
-				if(isInfinite()){
-					serv.announce("Next word");
-					upToWordIndex = -1;
-					Collections.shuffle(wordsToQuiz);
-				}
 			}else{
 				serv.announce("Correct! Next word... ");
 			}
@@ -111,11 +101,6 @@ public class NewQuiz {
 				if(upToWordIndex == wordsToQuiz.size()-1){
 					//End of quiz, do not prompt for next word.
 					serv.announce("Incorrect");
-					if(isInfinite()){
-						serv.announce("Next word");
-						upToWordIndex = -1;
-						Collections.shuffle(wordsToQuiz);
-					}
 				}else{
 					serv.announce("Incorrect! Next word... ");
 				}
@@ -156,12 +141,8 @@ public class NewQuiz {
 		return results;
 	}
 	
-	public boolean isInfinite(){
-		return rules.isInfinite();
-	}
-	
 	public String getType(){
-		return rules.getQuizType();
+		return type;
 	}
 	
 	/**

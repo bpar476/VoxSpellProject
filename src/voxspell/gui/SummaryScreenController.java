@@ -167,8 +167,10 @@ public class SummaryScreenController {
 			good.setVisible(true);
 		}else if(results.getScore() > results.answeredSize() * 0.5){
 			okay.setVisible(true);
+			nextLevelButton.setVisible(false);
 		}else{
 			poor.setVisible(true);
+			nextLevelButton.setVisible(false);
 		}
 
 		scoreLabel.setText("Score: " + results.getScore());
