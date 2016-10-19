@@ -21,8 +21,6 @@ import javafx.stage.Stage;
 import voxspell.Config;
 import voxspell.VoxSpell;
 import voxspell.festival.Festival;
-import voxspell.quiz.DummyQuiz;
-import voxspell.quiz.NewQuiz;
 import voxspell.quiz.PracticeQuiz;
 import voxspell.quiz.Quiz;
 import voxspell.quiz.QuizResults;

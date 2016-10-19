@@ -108,7 +108,6 @@ public class CreateProfileController {
 				wr = new PrintWriter(new FileWriter(userInfoFile, true));
 				//Store password hashcode for security.
 
-				String line;
 				//Check to make sure that username is not already taken.
 				wr.append(username + ":" + password.hashCode() + "\n");
 				wr.flush();
@@ -122,6 +121,10 @@ public class CreateProfileController {
 		}
 	}
 	
+	/**
+	 * Lets the user complete their registration by pressing enter.
+	 * @param ke
+	 */
 	@FXML
 	public void handleEnterPressed(KeyEvent ke){
 		if(ke.getCode() == KeyCode.ENTER){
@@ -138,7 +141,10 @@ public class CreateProfileController {
 		changeScene("LoginScreen.fxml");
 	}
 
-
+	
+	/**
+	 * Sets some text fields so that they only accept certain character classes.
+	 */
 	@FXML
 	public void initialize(){
 		//Code skeleton taken from

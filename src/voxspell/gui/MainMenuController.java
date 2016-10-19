@@ -93,6 +93,7 @@ public class MainMenuController {
 		}
 	}
 	
+	//helper method to change to spelling interface.
 	private void loadSpellScreen(Quiz quiz){
 		Stage primaryStage = VoxSpell.getMainStage();
 		try {

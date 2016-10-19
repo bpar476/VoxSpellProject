@@ -4,6 +4,12 @@ import java.util.Collections;
 
 import voxspell.festival.Festival;
 
+/**
+ * Class used to do an infinite practice quiz. Takes most of the logic from voxspell.quiz.NewQuiz. This class
+ * resets the quiz when the quiz has "ended" and provides interaction to skip a word if the user chooses to.
+ * @author bpar
+ *
+ */
 public class PracticeQuiz extends NewQuiz{
 	
 	public PracticeQuiz(){

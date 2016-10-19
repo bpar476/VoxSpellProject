@@ -297,6 +297,7 @@ public class SettingsController {
 			wr.append("voice=" + voice + "\n");
 			wr.append("music_disabled=" + musicDisabled + "\n");
 			wr.flush();
+			wr.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -335,6 +336,7 @@ public class SettingsController {
 				}
 				wr.flush();
 				wr.close();
+				rdr.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -363,6 +365,7 @@ public class SettingsController {
 			wr.append("voice=" + voice + "\n");
 			wr.append("music_disabled=" + false + "\n");
 			wr.flush();
+			wr.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

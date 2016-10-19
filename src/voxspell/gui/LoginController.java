@@ -143,7 +143,10 @@ public class LoginController {
 			handleLoginPressed();
 		}
 	}
-
+	
+	/**
+	 * Sets username text field so that it won't accept whitespace.
+	 */
 	public void initialize(){
 		usernameField.textProperty().addListener(
 				(observable, oldValue, newValue) -> {
