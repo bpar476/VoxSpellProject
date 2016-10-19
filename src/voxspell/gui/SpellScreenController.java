@@ -2,6 +2,7 @@ package voxspell.gui;
 
 import java.io.IOException;
 
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -357,6 +358,13 @@ public class SpellScreenController {
 		//TODO add english voice.
 		voiceBox.setItems(voices);
 		voiceBox.setPromptText(Config.getVoice());
+		spellZone.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					if(newValue.matches("(.*)([^A-Za-z\\s])(.*)")){
+						((StringProperty)observable).setValue(oldValue);
+					}
+				}
+			);
 	}
 
 }

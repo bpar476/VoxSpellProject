@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import voxspell.VoxSpell;
 
@@ -55,7 +58,7 @@ public class CreateProfileController {
 	 * @param ae
 	 */
 	@FXML
-	public void handleFinishPressed(ActionEvent ae){
+	public void handleFinishPressed(){
 		noUsername.setVisible(false);
 		noPassword.setVisible(false);
 		passwordMismatch.setVisible(false);
@@ -118,6 +121,13 @@ public class CreateProfileController {
 			changeScene("LoginScreen.fxml");
 		}
 	}
+	
+	@FXML
+	public void handleEnterPressed(KeyEvent ke){
+		if(ke.getCode() == KeyCode.ENTER){
+			handleFinishPressed();
+		}
+	}
 
 	/**
 	 * Takes user back to login screen if they decide they don't need to create an account.
@@ -129,6 +139,33 @@ public class CreateProfileController {
 	}
 
 
+	@FXML
+	public void initialize(){
+		//Code skeleton taken from
+		//http://stackoverflow.com/questions/15615890/recommended-way-to-restrict-input-in-javafx-textfield
+		passwordField.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					if(newValue.matches("(.*)(\\s+)(.*)")){
+						((StringProperty)observable).setValue(oldValue);
+					}
+				}
+			);
+		usernameField.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					if(newValue.matches("(.*)(\\s+)(.*)")){
+						((StringProperty)observable).setValue(oldValue);
+					}
+				}
+			);
+		confirmPasswordField.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					if(newValue.matches("(.*)(\\s+)(.*)")){
+						((StringProperty)observable).setValue(oldValue);
+					}
+				}
+			);
+	}
+	
 	//Helper method to change the scene.
 	private void changeScene(String fxmlFile){
 		Stage primaryStage = VoxSpell.getMainStage();

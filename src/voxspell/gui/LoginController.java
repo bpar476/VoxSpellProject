@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,7 +57,7 @@ public class LoginController {
 	 * @param ae
 	 */
 	@FXML
-	public void handleLoginPressed(ActionEvent ae){
+	public void handleLoginPressed(){
 		wrongPassword.setVisible(false);
 		userNotRecognised.setVisible(false);
 		BufferedReader rdr = null;
@@ -67,7 +68,7 @@ public class LoginController {
 			try {
 				//If the file is not found for some reason, create the file and try again.
 				userInfo.createNewFile();
-				handleLoginPressed(ae);
+				handleLoginPressed();
 			} catch (IOException e1) {
 				System.err.println("Unable to read/create user information file. Fatal error.");
 				e1.printStackTrace();
@@ -115,7 +116,7 @@ public class LoginController {
 			userInfo.delete();
 			try {
 				userInfo.createNewFile();
-				handleLoginPressed(ae);
+				handleLoginPressed();
 			} catch (IOException e1) {
 				System.err.println("Unable to read/create user information file. Fatal error.");
 				e1.printStackTrace();
@@ -139,10 +140,20 @@ public class LoginController {
 	@FXML
 	public void handleEnterPressed(KeyEvent ke){
 		if(ke.getCode() == KeyCode.ENTER){
-			handleLoginPressed(new ActionEvent());
+			handleLoginPressed();
 		}
 	}
 
+	public void initialize(){
+		usernameField.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					if(newValue.matches("(.*)(\\s+)(.*)")){
+						((StringProperty)observable).setValue(oldValue);
+					}
+				}
+			);
+	}
+	
 	//Helper method to change the scene.
 	private void changeScene(String fxmlFile){
 		Stage primaryStage = VoxSpell.getMainStage();
