@@ -26,9 +26,9 @@
                <children>
                   <TableView fx:id="quizTable" prefHeight="397.0" prefWidth="670.0">
                     <columns>
-                      <TableColumn fx:id="dateCol" prefWidth="187.0" resizable="false" text="Date" />
-                      <TableColumn fx:id="typeCol" minWidth="0.0" prefWidth="92.0" text="Quiz Type" />
-                        <TableColumn fx:id="listCol" prefWidth="148.0" text="Word list" />
+                      <TableColumn fx:id="dateCol" editable="false" prefWidth="187.0" resizable="false" sortType="ASCENDING" text="Date" />
+                      <TableColumn fx:id="typeCol" minWidth="0.0" prefWidth="92.0" sortable="false" text="Quiz Type" />
+                        <TableColumn fx:id="listCol" prefWidth="148.0" sortable="false" text="Word list" />
                         <TableColumn fx:id="levelCol" editable="false" prefWidth="56.0" text="Level" />
                         <TableColumn fx:id="scoreCol" prefWidth="69.0" text="Score" />
                         <TableColumn fx:id="streakCol" prefWidth="106.0" text="Best Streak" />

@@ -28,6 +28,8 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import voxspell.Config;
 import voxspell.VoxSpell;
+import voxspell.quiz.NewQuiz;
+import voxspell.quiz.PracticeQuiz;
 import voxspell.quiz.QuizResults;
 import voxspell.quiz.QuizResults.Result;
 import voxspell.quiz.QuizRules;
@@ -43,6 +45,7 @@ public class SummaryScreenController {
 
 	private static final String REWARD_SONG_LOCATION = System.getProperty("user.dir") + "/.Resources/media/milky-chu_-_With_You_And_Icecream_Flying_-_cut.mp3";
 
+	QuizResults results;
 	//FXML fields
 	@FXML
 	private Button playVideo;
@@ -84,7 +87,7 @@ public class SummaryScreenController {
 	public void handleNextLevel(ActionEvent ae){
 		QuizRules.setStartLevel(QuizRules.getInstance().getLevel() + 1);
 		QuizRules.setWordListLocation(Config.getWordListLocation());
-		changeScene("SpellScreen.fxml");
+		changeToSpellScene();
 	}
 	
 	/**
@@ -96,7 +99,30 @@ public class SummaryScreenController {
 	public void handleRetry(ActionEvent ae){
 		QuizRules.setStartLevel(Config.getStartLevel());
 		QuizRules.setWordListLocation(Config.getWordListLocation());
-		changeScene("SpellScreen.fxml");
+		changeToSpellScene();
+	}
+	
+	//Helper method to change to a spelling scene.
+	private void changeToSpellScene(){
+		rewardSongPlayer.stop();
+		Stage primaryStage = VoxSpell.getMainStage();
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			Parent root = loader.load(getClass().getResource("SpellScreen.fxml").openStream());
+			SpellScreenController controller = loader.getController();
+			
+			if(results.getQuizType().equals("New Quiz")){
+				controller.setQuiz(new NewQuiz());
+			}else if(results.getQuizType().equals("Practice Quiz")){
+				controller.setQuiz(new PracticeQuiz());
+			}		
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(DetailedStatisticsScreenController.class.getResource("main.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -151,7 +177,8 @@ public class SummaryScreenController {
 	 * @param results
 	 * @throws FileNotFoundException 
 	 */
-	public void setResults(QuizResults results) throws FileNotFoundException{		
+	public void setResults(QuizResults results) throws FileNotFoundException{
+		this.results = results;
 		//Looks through results object and sets all up the gui according to those values.
 		if(results.getScore() > results.answeredSize() * 0.9 & results.getBestStreak() == results.answeredSize()){
 			if(Config.isColourBlindMode()){

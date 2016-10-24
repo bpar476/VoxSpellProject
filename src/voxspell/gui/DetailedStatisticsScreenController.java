@@ -32,7 +32,7 @@ public class DetailedStatisticsScreenController {
 	@FXML
 	private TableView<QuizResults> quizTable;
 	@FXML
-	private TableColumn dateCol;
+	private TableColumn<QuizResults,Date> dateCol;
 	@FXML
 	private TableColumn<QuizResults,String> typeCol;
 	@FXML
@@ -116,5 +116,6 @@ public class DetailedStatisticsScreenController {
 		}
 
 		quizTable.setItems(data);
+		quizTable.sort();
 	}
 }

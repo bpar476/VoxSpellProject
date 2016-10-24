@@ -146,6 +146,7 @@ public class SpellScreenController {
 	 */
 	@FXML
 	public void handleStopQuizPressed(ActionEvent ae){
+		Festival.clear();
 		if(inQuiz){
 			endTime = System.currentTimeMillis();
 			results = quiz.getResults();
@@ -197,6 +198,7 @@ public class SpellScreenController {
 	 */
 	@FXML
 	public void handleSayAgainPressed(){
+		Festival.clear();
 		quiz.speakWord();
 		spellZone.requestFocus();
 	}
@@ -207,6 +209,7 @@ public class SpellScreenController {
 	 */
 	@FXML
 	public void handleMainMenuPressed(ActionEvent ae){
+		Festival.clear();
 		Stage primaryStage = VoxSpell.getMainStage();
 		QuizRules.reset();
 		try {
@@ -316,6 +319,7 @@ public class SpellScreenController {
 	@FXML
 	public void handlevoiceChanged(ActionEvent ae){
 		String voice = (String)voiceBox.getSelectionModel().getSelectedItem();
+		SettingsController.changeVoice(voice);
 		if(voice.equals("New Zealand")){
 			Festival.getInstance().kiwiVoice();
 		}else if(voice.equals("American")){

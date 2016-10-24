@@ -10,6 +10,7 @@ import java.util.Queue;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import voxspell.Config;
 
 /**
  * Singleton class encapsulating a Festival process. Taken from my assignment 3.
@@ -26,6 +27,14 @@ public class Festival {
 			serv = new FestivalService();
 		}
 		return serv;
+	}
+	
+	public static void clear(){
+		serv.kill();
+		serv = new FestivalService();
+		if(Config.getVoice().equals("New Zealand")){
+			serv.kiwiVoice();
+		}
 	}
 	
 	/**
@@ -62,6 +71,10 @@ public class Festival {
 		//Private helper method to make code easier to understand.
 		protected void setCommand(String comm){
 			command.add(comm);
+		}
+		
+		protected void kill(){
+			proc.destroy();
 		}
 		
 		/**

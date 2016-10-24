@@ -24,9 +24,9 @@ public class QuizHistory implements Serializable{
 	 */
 	public void add(QuizResults result){
 		if(history.size() > 50){
-			history.remove(0);
+			history.remove(history.size()-1);
 		}
-		history.add(result);
+		history.add(0,result);
 	}
 	
 	public void refresh(){

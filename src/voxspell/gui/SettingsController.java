@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Optional;
@@ -273,6 +274,50 @@ public class SettingsController {
 		}
 	}
 
+	protected static void changeVoice(String voice){
+		String startLevel = null;
+		String wordList = null;
+		String colourblind = null;
+		String musicDisabled = null;
+		
+		try {
+			BufferedReader rdr = new BufferedReader(new FileReader(System.getProperty("user.dir") + PROPERTIES_EXTENSION));
+			String line;
+			try {
+				while((line = rdr.readLine()) != null){
+					String[] lineSplit = line.split("=");
+					if(lineSplit[0].equals("startLevel")){
+						startLevel = lineSplit[1];
+					}else if(lineSplit[0].equals("wordlist")){
+						wordList = lineSplit[1];
+					}else if(lineSplit[0].equals("colourblind")){
+						colourblind = lineSplit[1];
+					}else if(lineSplit[0].equals("music_disabled")){
+						musicDisabled = lineSplit[1];
+					}
+				}
+				rdr.close();
+			} catch (IOException e) {
+				System.err.println("Fatal error: properties file corrupted");
+				e.printStackTrace();
+				return;
+			}
+			PrintWriter wr = new PrintWriter(new FileWriter(new File(System.getProperty("user.dir") + PROPERTIES_EXTENSION)));
+			wr.append("startLevel =" + startLevel + "\n");
+			wr.append("wordlist=" + wordList + "\n");
+			wr.append("colourblind=" + colourblind + "\n");
+			wr.append("music_disabled=" + musicDisabled + "\n");
+			wr.append("voice=" + voice + "\n");
+			wr.flush();
+			wr.close();
+		} catch (FileNotFoundException e) {
+			System.err.println("Fatal error: properties file not found");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.err.println("Error writing to properties file");
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Writes the current state of the settings screen to the voxspell properties file
