@@ -22,6 +22,10 @@ public class Festival {
 
 	private static FestivalService serv;
 	
+	/**
+	 * Returns the singleton instance associated with this festival service.
+	 * @return
+	 */
 	public static FestivalService getInstance(){
 		if(serv == null){
 			serv = new FestivalService();
@@ -29,6 +33,10 @@ public class Festival {
 		return serv;
 	}
 	
+	/**
+	 * Kills the festival process and starts it again. Used to stop large queues of words being
+	 * spoken over and over again.
+	 */
 	public static void clear(){
 		serv.kill();
 		serv = new FestivalService();

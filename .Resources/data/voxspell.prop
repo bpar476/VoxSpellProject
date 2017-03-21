@@ -1,0 +1,5 @@
+startlevel=1
+wordlist=NZCER-spelling-lists.txt
+colourblind=false
+voice=American
+music_disabled=false

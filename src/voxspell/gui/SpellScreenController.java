@@ -198,7 +198,6 @@ public class SpellScreenController {
 	 */
 	@FXML
 	public void handleSayAgainPressed(){
-		Festival.clear();
 		quiz.speakWord();
 		spellZone.requestFocus();
 	}

@@ -273,7 +273,11 @@ public class SettingsController {
 			startDifficultyBox.getSelectionModel().select(0);
 		}
 	}
-
+	
+	/**
+	 * Method to change the festival voice and keep it consistent with config file from other gui screens.
+	 * @param voice The textual name of the voice you wish to change to.
+	 */
 	protected static void changeVoice(String voice){
 		String startLevel = null;
 		String wordList = null;
@@ -286,7 +290,7 @@ public class SettingsController {
 			try {
 				while((line = rdr.readLine()) != null){
 					String[] lineSplit = line.split("=");
-					if(lineSplit[0].equals("startLevel")){
+					if(lineSplit[0].equals("startlevel")){
 						startLevel = lineSplit[1];
 					}else if(lineSplit[0].equals("wordlist")){
 						wordList = lineSplit[1];
@@ -303,7 +307,7 @@ public class SettingsController {
 				return;
 			}
 			PrintWriter wr = new PrintWriter(new FileWriter(new File(System.getProperty("user.dir") + PROPERTIES_EXTENSION)));
-			wr.append("startLevel =" + startLevel + "\n");
+			wr.append("startlevel=" + startLevel + "\n");
 			wr.append("wordlist=" + wordList + "\n");
 			wr.append("colourblind=" + colourblind + "\n");
 			wr.append("music_disabled=" + musicDisabled + "\n");
